@@ -41,7 +41,7 @@ export function DataTable<TData, TValue>({
     [],
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
-
+console.log(`inside data table`,data)
   const table = useReactTable({
     data,
     columns,
@@ -52,6 +52,7 @@ export function DataTable<TData, TValue>({
       columnFilters,
     },
     enableRowSelection: true,
+    enableMultiRowSelection: false,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -63,6 +64,7 @@ export function DataTable<TData, TValue>({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
+  console.log(table.getHeaderGroups());
 
   return (
     <div className="space-y-4">

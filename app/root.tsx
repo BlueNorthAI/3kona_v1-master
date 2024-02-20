@@ -1,4 +1,3 @@
-import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
@@ -12,14 +11,16 @@ import {
 
 import { getUser } from "~/session.server";
 
+import appstylesheetUrl from "./styles/app.css";
+import uistylesheetUrl from "./styles/shadcn.css";
 import kendoStylesheetUrl from "./styles/kendo.css";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindStylesheetUrl },
-  // { rel: "stylesheet", href: appstylesheetUrl },
   { rel: "stylesheet", href: kendoStylesheetUrl },
 ];
+
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   return json({ user: await getUser(request) });
 };

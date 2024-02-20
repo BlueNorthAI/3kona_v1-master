@@ -1,37 +1,60 @@
+import { Link, useLoaderData, Form, useNavigate } from "@remix-run/react";
 import { columns } from "../components/columns";
 import { DataTable } from "../components/data-table";
 import table from "../data/ui/tasks.json";
+import { getScenarioItems } from "~/models/scenario.server";
+import { json, redirect } from "@remix-run/node";
 import { Button } from "../components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../components/ui/card";
 
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "../components/ui/tabs";
+import { ArrowUpTrayIcon } from "@heroicons/react/20/solid";
 
+const navigation = [
+  { id: 1, name: "S&OP", to: "/snop/optimize" },
+  { id: 2, name: "Demand", to: "#" },
+  { id: 3, name: "Inventory", to: "#" },
+  { id: 4, name: "Logistics", to: "#" },
+  { id: 5, name: "Procurement", to: "#" },
+];
+export const loader = async () => {
+  const scenarioList = await getScenarioItems();
+  console.log(scenarioList);
+
+  return json({ scenarioList });
+};
 export default function TaskPage() {
+    const { scenarioList } = useLoaderData<typeof loader>();
   return (
     <>
-      <div className="mx-4 mt-2 rounded-lg bg-white shadow">
-        <div className="flex items-center justify-between p-2">
-          <div className="m-2 flex-1">
-            <h2 className="text-3xl font-bold leading-7 text-gray-800 ">
-              Appbar
+      <div className="m-2">
+        <div className="mx-2 py-3.5 rounded-t-lg bg-sky-500 border-b ">
+          <nav
+            className="ml-6 pl-6 flex items-center justify-center"
+            aria-label="Global"
+          >
+            <div className=" flex gap-x-8 justify-center ">
+              {navigation.map((item) => (
+                <Link
+                  key={item.id}
+                  to={item.to}
+                  className=" text-base lg:text-lg font-semibold leading-6 text-white hover:text-gray-200"
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </nav>
+        </div>
+        <div className="bg-white mx-2 shadow-md rounded-b-lg">
+          <div className="flex items-center  justify-between">
+            <h2 className="text-3xl font-bold ml-4 p-2 text-transparent bg-clip-text   bg-gradient-to-r from-blue-700 via-sky-700 to-blue-700 font-display">
+              Sales & Operations Planning - List of Scenarios
             </h2>
           </div>
+
+          <div className="m-4 bg-white rounded-lg p-4">
+            <DataTable data={scenarioList} columns={columns} />
+          </div>
         </div>
-      </div>
-     
-      <div className="bg-white mx-4 mt-4 p-2 rounded-lg">
-        <DataTable data={table} columns={columns} />
       </div>
     </>
   );

@@ -1,0 +1,20 @@
+[
+  {
+    "bucket": 1,
+    "cost_name": " Material Cost ",
+    "sub":"per unit",
+    "cost_value": 75
+  },
+  {
+    "bucket": 1,
+    "cost_name": "Holding Cost ",
+    "sub": "per unit per month",
+    "cost_value": 25
+  },
+  {
+    "bucket": 1,
+    "cost_name": "Stockout Cost",
+    "sub":"per unit per month",
+    "cost_value": 50
+  }
+]

@@ -1,5 +1,5 @@
 import {GridContainer} from '~/kendo/grid/kendogrid.client';
-import  GridNew  from '~/kendo/grid/kendogridnew.client';
+// import  GridNew  from '~/kendo/grid/kendogridnew.client';
 
 const Fallback = () => {
     return <div>
@@ -19,6 +19,6 @@ export default function WrapperChartGrid({data}) {
   return typeof document !== "undefined" ? <GridContainer data={data} /> : <Fallback />
 }
 
-export function WrapperChartNewGrid() { 
-  return typeof document !== "undefined" ? <GridNew /> : <Fallback />
-}
+// export function WrapperChartNewGrid() { 
+//   return typeof document !== "undefined" ? <GridNew /> : <Fallback />
+// }

@@ -1,0 +1,27 @@
+[
+  {
+    "bucket": 0,
+    "constraint_name": "Starting Inventory",
+    "sub": "Units",
+    "constraint_value": 500
+  },
+  {
+    "bucket": 0,
+    "constraint_name": "Ending Inventory",
+    "sub": "Units",
+    "constraint_value": 500
+  },
+
+  {
+    "bucket": 0,
+    "constraint_name": "Starting Backlog",
+    "sub": "Units",
+    "constraint_value": 0
+  },
+  {
+    "bucket": 0,
+    "constraint_name": "Ending Backlog",
+    "sub": "Units",
+    "constraint_value": 0
+  }
+]

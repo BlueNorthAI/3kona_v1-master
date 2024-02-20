@@ -1,0 +1,38 @@
+[
+  {
+    "bucket": 1,
+    "truck_name": "Purchase Cost ",
+    "sub": "inculing Fabrication",
+    "truck_value": "2,300,000"
+  },
+  {
+    "bucket": 2,
+    "truck_name": "Mileage with Load",
+    "sub": "",
+    "truck_value": 4.5
+  },
+  {
+    "bucket": 3,
+    "truck_name": "Mileage without Load",
+    "sub": "",
+    "truck_value": 5.0
+  },
+  {
+    "bucket": 4,
+    "truck_name": "Maintenance",
+    "sub": "",
+    "truck_value": "168,000"
+  },
+  {
+    "bucket": 5,
+    "truck_name": "Capacity",
+    "sub": "",
+    "truck_value": 60
+  },
+  {
+    "bucket": 6,
+    "truck_name": "Annual Distance",
+    "sub": "",
+    "truck_value": "84,000"
+  }
+]

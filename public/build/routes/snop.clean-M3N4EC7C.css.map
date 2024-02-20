@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["clean.css"],
+  "sourcesContent": [".truck-summary {\r\n  border: 1px solid #ccc;\r\n  padding: 20px;\r\n  margin: 20px;\r\n  background-color: #f8f8f8;\r\n  font-family: Arial, sans-serif;\r\n  width: 50%;\r\n}\r\n\r\n.summary-row {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  margin-bottom: 10px;\r\n}\r\n\r\n.summary-label {\r\n  font-weight: bold;\r\n  font-size: 16px;\r\n  width: 30%;\r\n}\r\n\r\n.summary-value {\r\n  font-weight: normal;\r\n  font-size: 16px;\r\n  width: 70%;\r\n}\r\n\r\n.summary-value em {\r\n  font-style: italic;\r\n}\r\n\r\n.trip-summary h3 {\r\n  font-size: 20px;\r\n  font-weight: bold;\r\n  margin-bottom: 10px;\r\n}\r\n\r\n.trip-summary .summary-row {\r\n  margin-bottom: 5px;\r\n}\r\n\r\n.trip-summary .summary-row:last-child {\r\n  margin-bottom: 0;\r\n}\r\n\r\n.trip-summary .summary-label {\r\n  width: 40%;\r\n}\r\n\r\n.trip-summary .summary-value {\r\n  width: 60%;\r\n}"],
+  "mappings": ";AAAA;AACE;AACA;AACA;AACA;AACA;AACA;;AAGF;AACE;AACA;AACA;;AAGF;AACE;AACA;AACA;;AAGF;AACE;AACA;AACA;;AAGF;AACE;;AAGF;AACE;AACA;AACA;;AAGF;AACE;;AAGF;AACE;;AAGF;AACE;;AAGF;AACE;;",
+  "names": []
+}

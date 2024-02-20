@@ -1,0 +1,28 @@
+[
+  {
+    "bucket": 0,
+    "constraint_name": "Max overtime hours",
+    "sub":"per employee per month",
+    "constraint_value": 160
+  },
+
+  {
+    "bucket": 0,
+    "constraint_name": " Starting # of employee",
+    "sub": "Units",
+    "constraint_value": 36
+  },
+  {
+    "bucket": 0,
+    "constraint_name": "Min ending # of employees",
+    "sub": "Units",
+    "constraint_value": 30
+  },
+  {
+    "bucket": 0,
+    "constraint_name": "Max ending # of employees",
+    "sub": "Units",
+    "constraint_value": 36
+  }
+   
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "bucket": 1,
+    "cost_name": "Hiring Cost ",
+    "sub": "per employee",
+    "cost_value": 1200
+  },
+  {
+    "bucket": 1,
+    "cost_name": "Layoff Cost",
+    "sub": "per employee",
+    "cost_value": 3600
+  },
+
+  {
+    "bucket": 1,
+    "cost_name": "Employee Cost",
+    "sub": "per employee",
+    "cost_value": 2400
+  },
+  {
+    "bucket": 1,
+    "cost_name": "Overtime Cost",
+    "sub": "per hour",
+    "cost_value": 25
+  }
+]

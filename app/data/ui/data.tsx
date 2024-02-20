@@ -13,40 +13,43 @@ export const labels = [
   {
     value: "bug",
     label: "Bug",
+    color:"bg-red-100"
   },
   {
     value: "feature",
     label: "Feature",
+    color:"bg-yellow-100"
   },
   {
     value: "documentation",
     label: "Documentation",
+    color:"bg-green-100"
   },
 ]
 
 export const statuses = [
   {
-    value: "backlog",
-    label: "Backlog",
+    value: "Open",
+    label: "Open",
     icon: QuestionMarkCircledIcon,
   },
   {
-    value: "todo",
-    label: "Todo",
+    value: "Sumbitted",
+    label:"Submitted",
     icon: CircleIcon,
   },
   {
-    value: "in progress",
+    value: "In-Progress",
     label: "In Progress",
     icon: StopwatchIcon,
   },
   {
-    value: "done",
-    label: "Done",
+    value: "Completed",
+    label: "Completed",
     icon: CheckCircledIcon,
   },
   {
-    value: "canceled",
+    value: "Canceled",
     label: "Canceled",
     icon: CrossCircledIcon,
   },

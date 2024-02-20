@@ -9,7 +9,8 @@ import {
   PersonIcon,
   PieChartIcon,
   MixIcon,
-} from "@radix-ui/react-icons";
+  BarChartIcon
+} from "@radix-ui/react-icons"
 import { type LinksFunction } from "@remix-run/node";
 import { Outlet, NavLink, Link } from "@remix-run/react";
 import { useState } from "react";
@@ -29,6 +30,7 @@ const menus = [
     icon: CubeIcon,
     current: false,
   },
+
   {
     id: 2,
     name: "Scenario",
@@ -36,7 +38,6 @@ const menus = [
     icon: GearIcon,
     current: false,
   },
-
   {
     id: 3,
     name: "Optimizer",
@@ -51,56 +52,34 @@ const menus = [
     icon: PieChartIcon,
     current: false,
   },
-
-  // {
-  //   name: "Scheduler",
-  //   to: "/scenario/dashboard/optimizer/schedule",
-  //   icon: TableCellsIcon,
-  //   current: false,
-  // },
-  // {
-
-  //   name: "Scheduler",
-  //   to: "/scenario/dashboard/optimizer/scheduler",
-  //   icon: AdjustmentsHorizontalIcon,
-  //   current: false,
-  // },
-  // {
-  //   name: "Tailwindcss",
-  //   to: "/scenario/dashboard/optimizer/tail",
-  //   icon: AdjustmentsHorizontalIcon,
-  //   current: false,
-  // },
-  // {
-  //   name: "KPIs",
-  //   to: "/scenario/dashboard/optimizer/kpi",
-  //   icon: ChartBarIcon,
-  //   current: false,
-  // },
-  // {
-  //   name: "Action",
-  //   to: "/scenario/dashboard/actions/overview",
-  //   icon: ArrowTrendingUpIcon,
-  //   current: false,
-  // },
-  // {
-  //   name: "Action",
-  //   to: "/scenario/dashboard/optimizer/table",
-  //   icon: ArrowTrendingUpIcon,
-  //   current: false,
-  // },
-  // {
-  //   name: "Action",
-  //   to: "/scenario/dashboard/optimizer/ktable",
-  //   icon: ArrowTrendingUpIcon,
-  //   current: false,
-  // },
-  // {
-  //   name: "Table",
-  //   to: "/scenario/dashboard/optimizer/ktable",
-  //   icon: ArrowTrendingUpIcon,
-  //   current: false,
-  // },
+  {
+    id: 5,
+    name: "Results",
+    to: "/snop/demand",
+    icon: PieChartIcon,
+    current: false,
+  },
+  {
+    id: 6,
+    name: "Truck",
+    to: "/snop/truck",
+    icon: BarChartIcon,
+    current: false,
+  },
+  {
+    id: 7,
+    name: "chat chart",
+    to: "/snop/chatchart",
+    icon: BarChartIcon,
+    current: false,
+  },
+  {
+    id: 8,
+    name: "chat",
+    to: "/snop/chat",
+    icon: BarChartIcon,
+    current: false,
+  },
 ];
 
 function classNames(
@@ -129,8 +108,8 @@ export default function Sidebar() {
             />
           </div>
 
-          <nav aria-label="Sidebar" className="flex flex-col items-center">
-            <div className="static mt-4 w-full flex-1 space-y-1 px-2">
+          <nav aria-label="Sidebar" className="flex items-center">
+            <div className="static mt-4 w-full  space-y-1 px-2">
               {menus.map((item, index) => (
                 <NavLink
                   to={item.to}

@@ -1,0 +1,21 @@
+[
+
+  {
+    "bucket": 1,
+    "cost_name": "Material Cost",
+    "sub":"per unit",
+    "cost_value": 175
+  },
+  {
+    "bucket": 1,
+    "cost_name": "Manufacturing Cost",
+    "sub":"per unit",
+    "cost_value": 175
+  },
+    {
+      "bucket": 1,
+      "cost_name": "Logistics Cost",
+      "sub": "per unit",
+      "cost_value": 175
+    }
+]

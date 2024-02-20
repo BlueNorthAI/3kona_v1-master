@@ -10,13 +10,32 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
 import { Input } from "~/components/ui/input";
+import { Button } from "~/components/ui/button";
+import { Label } from "~/components/ui/label";
 import { json } from "@remix-run/node";
 import { log } from "console";
+import { cn } from "~/lib/utils";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+const navigation = [
+  { id: 1, name: "S&OP", to: "/snop/optimize" },
+  { id: 2, name: "Demand", to: "#" },
+  { id: 3, name: "Inventory", to: "#" },
+  { id: 4, name: "Logistics", to: "#" },
+  { id: 5, name: "Procurement", to: "#" },
+];
+
 export const action = async ({ request }) => {
   const formData = await request.formData();
   const start = formData.get("start");
@@ -36,10 +55,7 @@ export const action = async ({ request }) => {
 
 const plans = [
   { name: "Optimization completed", description: "1:51:32 PM - 2/23/2021" },
-  {
-    name: "Scenario modified",
-    description: "1:21:17 PM - 6/6/2023",
-  },
+
   {
     name: "Solve status",
     description: "OPTIMAL",
@@ -49,7 +65,20 @@ const plans = [
     description: "eeeb3265-3cf4-44f4-944d-ea7dad4c12ed",
   },
 ];
-
+function DemoContainer({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div
+      className={cn(
+        "flex items-center justify-center [&>div]:w-full",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
 export default function Optimizer() {
   const data = useActionData();
   const [jobStatus, setJobStatus] = useState("Waiting for job to start...");
@@ -65,7 +94,7 @@ export default function Optimizer() {
         const statusData = await response.json();
         if (response.ok) {
           setJobStatus(`Status: ${statusData.status}`);
-          console.log(statusData.status)
+          console.log(statusData.status);
           if (statusData.status !== "in progress") {
             clearInterval(intervalId);
           }
@@ -81,136 +110,159 @@ export default function Optimizer() {
 
   return (
     <>
-      <div className="mx-4 mt-1 rounded-lg bg-white shadow">
-        <div className="flex items-center justify-between p-2">
-          <div className="m-1 flex-1">
-            <h2 className="text-3xl font-bold leading-7 text-gray-800 p-1">
-              Sales & Operations Optimizer
+      <div className="m-2">
+        <div className="mx-2 py-3.5 rounded-t-lg bg-sky-500 border-b ">
+          <nav
+            className="ml-6 pl-6 flex items-center justify-center"
+            aria-label="Global"
+          >
+            <div className=" flex gap-x-8 justify-center ">
+              {navigation.map((item) => (
+                <Link
+                  key={item.id}
+                  to={item.to}
+                  className=" text-base lg:text-lg font-semibold leading-6 text-white hover:text-gray-200"
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </nav>
+        </div>
+
+        <div className="bg-white mx-2 shadow-md rounded-b-lg pb-6">
+          <div className="flex items-center  justify-between">
+            <h2 className="text-3xl font-bold ml-4 p-2 text-transparent bg-clip-text   bg-gradient-to-r from-blue-700 via-sky-700 to-blue-700 font-display">
+              Optimizer Dashboard
             </h2>
           </div>
-        </div>
-      </div>
-      <div className="mx-4">
-        <div role="list" className="mt-2 grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <div className="col-span-1 flex flex-col divide-y divide-white rounded-lg bg-white shadow-xl shadow-slate-900/10">
-            <div className="relative flex flex-1 flex-col py-2 pl-3">
-              <h3 className="m-2 text-xl font-bold text-gray-900">
-                Optimization
-              </h3>
 
-              <div className="m-2 rounded-lg border px-4 py-2">
-                <div>
-                  <span className="">Optimize</span>
-                  <Select>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Select a fruit" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                        <SelectItem value="blueberry">Blueberry</SelectItem>
-                        <SelectItem value="grapes">Grapes</SelectItem>
-                        <SelectItem value="pineapple">Pineapple</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <span className="">Optimize</span>
-                  <Input type="email" className="" placeholder="Email" />
-                </div>
-                <div>
-                  <span className="">Optimize</span>
-                  <Input type="email" placeholder="Email" />
-                </div>
-              </div>
+          <div className="items-start justify-center gap-6 rounded-lg p-4 md:grid lg:grid-cols-2 xl:grid-cols-2">
+            <div className="col-span-2 grid items-start  gap-2 lg:col-span-2 lg:grid-cols-2 xl:col-span-1 xl:grid-cols-1 ">
+              <DemoContainer>
+                <Card className="shadow-lg text-blue-900">
+                  <CardHeader className="space-y-1 ">
+                    <CardTitle className="text-2xl flex">
+                      Scenario Summary
+                    </CardTitle>
 
-              <Form method="post" className="flex justify-center pt-2">
-                <button
-                  type="button"
-                  className="text-md rounded-md border bg-indigo-500 px-5 py-2 font-semibold text-white shadow-sm hover:bg-indigo-600"
-                >
-                  LOG
-                </button>
-                <button
-                  type="submit"
-                  name="start"
-                  value="yes"
-                  className="text-md ml-2 inline-flex justify-center rounded-md bg-rose-500 px-3 py-2 font-semibold text-white shadow-sm hover:bg-rose-600"
-                >
-                  Optimize
-                </button>
-              </Form>
-              {data && (
-                <div id="jobStatus">
-                  Job ID:{" "}
-                  <a
-                    href={`http://localhost:5000/results/${
-                      (data as { job_id?: string }).job_id
-                    }`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {(data as { job_id?: string }).job_id}
-                  </a>
-                  . {jobStatus}
-                </div>
-              )}
-            </div>
-          </div>
+                    <div className="border-b" />
+                  </CardHeader>
 
-          <div className="col-span-1 flex flex-col divide-y divide-white rounded-lg bg-white shadow-xl shadow-slate-900/10">
-            <div className="relative flex flex-1 flex-col py-2 pl-3">
-              <h3 className="m-2 text-base font-medium text-gray-900">
-                Parameters
-              </h3>
-
-              <div className="m-2 flex flex-row justify-start rounded-lg border ">
-                <div className="mx-4 my-4 flex flex-1 flex-col">
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium leading-6 text-gray-400"
-                  >
-                    Spare threshold
-                  </label>
-                  <div className="relative mt-2">
-                    <input
-                      type="text"
-                      name="name"
-                      id="name"
-                      className="peer block w-full border-0 bg-gray-50 py-1.5 pr-4 text-right text-gray-900 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder="20"
-                    />
-                    <div
-                      className="absolute inset-x-0 bottom-0 border-t border-gray-300 "
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <div className="mt-6">
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium leading-6 text-gray-400"
-                    >
-                      Number of Knives
-                    </label>
-                    <div className="relative mt-2">
-                      <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        className="peer block w-full border-0 bg-gray-50 py-1.5 pr-4 text-right text-gray-900 focus:ring-0 sm:text-sm sm:leading-6"
-                        placeholder="7"
-                      />
-                      <div
-                        className="absolute inset-x-0 bottom-0 border-t border-gray-300 peer-focus:border-t-2 "
-                        aria-hidden="true"
+                  <CardContent className="grid gap-4 space-y-4">
+                    <div className="flex items-center space-x-4">
+                      <span className="font-semibold">
+                        Select for Optimization
+                      </span>
+                      <Select>
+                        <SelectTrigger className="w-[180px]">
+                          <SelectValue placeholder="Scenario" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectLabel>Fruits</SelectLabel>
+                            <SelectItem value="apple">Apple</SelectItem>
+                            <SelectItem value="banana">Banana</SelectItem>
+                            <SelectItem value="blueberry">Blueberry</SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="flex items-center space-x-4 ">
+                      <span className="w-[160px] font-semibold">
+                        Spare threshold
+                      </span>
+                      <Input
+                        className="w-[180px]"
+                        type="email"
+                        id="email"
+                        placeholder="20"
                       />
                     </div>
-                  </div>
-                </div>
-              </div>
+
+                    <div className="flex items-center space-x-4 ">
+                      <span className="w-[160px] font-semibold">
+                        Number of Knives
+                      </span>
+                      <Input
+                        className="w-[180px]"
+                        type="email"
+                        id="email"
+                        placeholder="0"
+                      />
+                    </div>
+
+                    <Form className="flex border-t justify-center pt-4">
+                      <Button
+                        type="submit"
+                        name="start"
+                        value="yes"
+                        className="text-base bg-blue-500  text-white hover:bg-blue-600"
+                      >
+                        Optimize
+                      </Button>
+                    </Form>
+                  </CardContent>
+                </Card>
+              </DemoContainer>
+            </div>
+
+            <div className="col-span-2 grid items-start gap-6 lg:col-span-2 lg:grid-cols-2 xl:col-span-1 xl:grid-cols-1">
+              <DemoContainer>
+                <Card className="shadow-lg text-blue-900">
+                  <CardHeader className="space-y-1">
+                    <CardTitle className="text-2xl">
+                      Optimization Parameters
+                    </CardTitle>
+                    <div className="border-b" />
+                  </CardHeader>
+                  <CardContent className="grid gap-4 space-y-4">
+                    <div className="flex items-center space-x-4 ">
+                      <span className="w-[160px] font-semibold">
+                        Optimization Status
+                      </span>
+                      <Input
+                        className="w-[290px]"
+                        type="email"
+                        id="email"
+                        placeholder="Completed @ 1:51:32 PM - 2/23/2021"
+                      />
+                    </div>
+
+                    <div className="flex items-center space-x-4 ">
+                      <span className="w-[160px] font-semibold">
+                        Solver Status
+                      </span>
+                      <Input
+                        className="w-[290px]"
+                        type="email"
+                        id="email"
+                        placeholder="OPTIMAL"
+                      />
+                    </div>
+
+                    <div className="flex items-center space-x-4 ">
+                      <span className="w-[160px] font-semibold">Job ID</span>
+                      <Input
+                        className="w-[290px]"
+                        type="email"
+                        id="email"
+                        placeholder="eeeb3265-3cf4-44f4-944d-ea7dad4c12ed"
+                      />
+                    </div>
+                    <Form className="flex border-t justify-center pt-4">
+                      <Button
+                        type="submit"
+                        name="start"
+                        value="yes"
+                        className="text-base bg-blue-500  text-white hover:bg-blue-600"
+                      >
+                        Log
+                      </Button>
+                    </Form>
+                  </CardContent>
+                </Card>
+              </DemoContainer>
             </div>
           </div>
         </div>

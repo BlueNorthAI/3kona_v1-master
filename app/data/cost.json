@@ -1,0 +1,57 @@
+[
+  {
+    "bucket": 1,
+    "cost_name": " Material Cost ",
+    "sub": "(per unit)",
+    "cost_value": 75
+  },
+  {
+    "bucket": 1,
+    "cost_name": "Holding Cost ",
+    "sub": "(per unit per month)",
+    "cost_value": 25
+  },
+  {
+    "bucket": 1,
+    "cost_name": "Stockout Cost ",
+    "sub": "(per unit per month)",
+    "cost_value": 50
+  },
+
+  {
+    "bucket": 1,
+    "cost_name": "Hiring Cost",
+    "sub": " (per employee)",
+    "cost_value": 1200
+  },
+  {
+    "bucket": 1,
+    "cost_name": "Layoff Cost",
+    "sub": "(per employee)",
+    "cost_value": 3600
+  },
+  {
+    "bucket": 1,
+    "cost_name": "Labor Hours Cost",
+    "sub":"",
+    "cost_value": 4
+  },
+  {
+    "bucket": 1,
+    "cost_name": "Employee Cost",
+    "sub": "",
+    "cost_value": 2400
+  },
+  {
+    "bucket": 1,
+    "cost_name": "Overtime Cost ",
+    "sub": "(per hour)",
+    "cost_value": 25
+  },
+  {
+    "bucket": 1,
+    "cost_name": "Outsourcing Cost",
+    "sub": "(per unit)",
+    "cost_value": 175
+  }
+]

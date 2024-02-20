@@ -1,0 +1,52 @@
+.truck-summary {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px;
+  background-color: #f8f8f8;
+  font-family: Arial, sans-serif;
+  width: 50%;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.summary-label {
+  font-weight: bold;
+  font-size: 16px;
+  width: 30%;
+}
+
+.summary-value {
+  font-weight: normal;
+  font-size: 16px;
+  width: 70%;
+}
+
+.summary-value em {
+  font-style: italic;
+}
+
+.trip-summary h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.trip-summary .summary-row {
+  margin-bottom: 5px;
+}
+
+.trip-summary .summary-row:last-child {
+  margin-bottom: 0;
+}
+
+.trip-summary .summary-label {
+  width: 40%;
+}
+
+.trip-summary .summary-value {
+  width: 60%;
+}

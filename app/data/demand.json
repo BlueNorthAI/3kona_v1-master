@@ -1,0 +1,14 @@
+[
+  { "bucket": 1, "demand": 2800 },
+  { "bucket": 2, "demand": 2800 },
+  { "bucket": 3, "demand": 1000 },
+  { "bucket": 4, "demand": 920 },
+  { "bucket": 5, "demand": 780 },
+  { "bucket": 6, "demand": 950 },
+  { "bucket": 7, "demand": 1050 },
+  { "bucket": 8, "demand": 1200 },
+  { "bucket": 9, "demand": 2000 },
+  { "bucket": 10, "demand": 2500 },
+  { "bucket": 11, "demand": 3000 },
+  { "bucket": 12, "demand": 2800 }
+]

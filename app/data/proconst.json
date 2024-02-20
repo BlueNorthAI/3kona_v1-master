@@ -1,0 +1,8 @@
+[
+  {
+    "bucket": 0,
+    "constraint_name": "Labour hours",
+    "sub": "per employee per unit",
+    "constraint_value": 4
+  }
+]
