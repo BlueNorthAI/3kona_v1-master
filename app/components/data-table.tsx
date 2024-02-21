@@ -13,7 +13,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import * as React from "react";
-
+import { Form } from "@remix-run/react";
 import { DataTablePagination } from "../components/data-table-pagination";
 import { DataTableToolbar } from "../components/data-table-toolbar";
 import {
@@ -41,7 +41,6 @@ export function DataTable<TData, TValue>({
     [],
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
-console.log(`inside data table`,data)
   const table = useReactTable({
     data,
     columns,
@@ -64,7 +63,6 @@ console.log(`inside data table`,data)
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
-  console.log(table.getHeaderGroups());
 
   return (
     <div className="space-y-4">
@@ -92,6 +90,7 @@ console.log(`inside data table`,data)
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
+                // <Form method="post" key={row.id}>
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
@@ -105,6 +104,7 @@ console.log(`inside data table`,data)
                     </TableCell>
                   ))}
                 </TableRow>
+                // </Form>
               ))
             ) : (
               <TableRow>

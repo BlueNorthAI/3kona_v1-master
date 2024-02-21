@@ -74,7 +74,7 @@ model PlanInput {
 
 model SnopScenario {
   id                    Int       @id @default(autoincrement())
-  scenario_id           String?
+  scenario_id           String?   @unique
   description           String?
   CreatedAt             DateTime? @default(now())
   UpdatedAt             DateTime? @default(now())

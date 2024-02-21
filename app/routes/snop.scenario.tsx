@@ -2,7 +2,7 @@ import { Link, useLoaderData, Form, useNavigate } from "@remix-run/react";
 import { columns } from "../components/columns";
 import { DataTable } from "../components/data-table";
 import table from "../data/ui/tasks.json";
-import { getScenarioItems } from "~/models/scenario.server";
+import { getScenarioItems, updateScenario } from "~/models/scenario.server";
 import { json, redirect } from "@remix-run/node";
 import { Button } from "../components/ui/button";
 
@@ -15,14 +15,30 @@ const navigation = [
   { id: 4, name: "Logistics", to: "#" },
   { id: 5, name: "Procurement", to: "#" },
 ];
+
 export const loader = async () => {
   const scenarioList = await getScenarioItems();
-  console.log(scenarioList);
+  // console.log(scenarioList);
 
   return json({ scenarioList });
 };
+
+export const action = async ({ request }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  const intent = formData.get("intent");
+  const scenarioId = formData.get("scenario_id");
+  if (intent === "optimize") {
+    await updateScenario(scenarioId, "Submitted");
+  }
+  return redirect(".");
+  // if (intent === 'optimize'){
+  //   await updateScenario()
+  // }
+};
+
 export default function TaskPage() {
-    const { scenarioList } = useLoaderData<typeof loader>();
+  const { scenarioList } = useLoaderData<typeof loader>();
   return (
     <>
       <div className="m-2">

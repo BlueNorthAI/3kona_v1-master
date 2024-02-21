@@ -1,46 +1,70 @@
-"use client"
+"use client";
 
-import { DotsHorizontalIcon } from "@radix-ui/react-icons"
-import { Row } from "@tanstack/react-table"
+// import { DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { Row } from "@tanstack/react-table";
 
-import { labels } from "../data/ui/data"
-import { taskSchema } from "../data/ui/schema"
+import { labels } from "../data/ui/data";
+import { taskSchema } from "../data/ui/schema";
 
-import { Button } from "./ui/button"
+import { Button } from "./ui/button";
 import {
   DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
+  // DropdownMenuContent,
+  // DropdownMenuItem,
+  // DropdownMenuRadioGroup,
+  // DropdownMenuRadioItem,
+  // DropdownMenuSeparator,
+  // DropdownMenuShortcut,
+  // DropdownMenuSub,
+  // DropdownMenuSubContent,
+  // DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu"
-
+} from "./ui/dropdown-menu";
+import { useSubmit, Form, useFetcher } from "@remix-run/react";
 
 interface DataTableRowActionsProps<TData> {
-  row: Row<TData>
+  row: Row<TData>;
 }
 
 export function DataTableRowSubmit<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  const task = taskSchema.parse(row.original)
+  const task = taskSchema.parse(row.original);
+  const fetcher = useFetcher();
+  // console.log("selected row", row);
+  // console.log("row id selected", row.getIsSelected().valueOf)
+  console.log("task", task);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
+        {/* <input
+          defaultValue={row.id}
+          // aria-label="First name"
+          name="id"
+          value={row.getIsSelected() ? row.id : null}
+          // type="number"
+          // placeholder="First"
+          hidden
+        // /> */}
+        {/* // <Form method="post"> */}
         <Button
           className="bg-blue-900 hover:bg-blue-800"
-          disabled={!row.getIsSelected()}
+          disabled={row.getIsSelected() ? (row.original.Status === "Open" ? false : true) : true}
+          // name="intent"
+          // value="optimize"
+          type="submit"
+          onClick={() =>
+            fetcher.submit(
+              { scenario_id: row.original.scenario_id, intent: "optimize" },
+              { method: "post" },
+            )
+          }
         >
           Submit
           <span className="sr-only">Open menu</span>
         </Button>
+        {/* </Form> */}
         {/* <Button
           variant="ghost"
           className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"

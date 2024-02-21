@@ -1,4 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
+import { Form } from "@remix-run/react";
 
 import { labels, priorities, statuses } from "../data/ui/data";
 import { Task } from "../data/ui/schema";
@@ -80,7 +81,6 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Updated Date" />
     ),
     cell: ({ row }) => {
-    
       return (
         <div>
           {" "}
@@ -96,11 +96,11 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Module" />
     ),
     cell: ({ row }) => {
-      
-
       return (
         <div>
-          <Badge variant="outline" className="bg-green-100 text-green-900">{row.getValue("module")}</Badge>
+          <Badge variant="outline" className="bg-green-100 text-green-900">
+            {row.getValue("module")}
+          </Badge>
         </div>
       );
     },

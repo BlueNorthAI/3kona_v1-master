@@ -20,3 +20,23 @@ export function createScenario(inputData) {
     data: inputData,
   });
 }
+
+export async function updateScenario(scenario_id, status) {
+  return await prisma.snopScenario.update({
+    where: {
+      scenario_id: scenario_id, // Assuming scenario_id is the unique identifier or primary key
+    },
+    data: {
+      Status: status, // Set the status to the value passed to the function
+    },
+  });
+}
+
+export async function getScenarioById(scenario_id){
+  return await prisma.snopScenario.findUnique({
+    where: {
+      scenario_id: scenario_id, // Assuming scenario_id is the unique identifier or primary key
+    }
+  })
+}
+

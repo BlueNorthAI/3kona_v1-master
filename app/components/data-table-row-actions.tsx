@@ -43,9 +43,9 @@ export function DataTableRowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[140px]">
-        <DropdownMenuItem>
-          <Link to="/snop/update">Edit</Link>
-        </DropdownMenuItem>
+        <Link to={`/snop/scenario/${row.original.scenario_id}`}>
+          <DropdownMenuItem>Edit</DropdownMenuItem>
+        </Link>
         <DropdownMenuItem>Make a copy</DropdownMenuItem>
         <DropdownMenuItem>Archive</DropdownMenuItem>
         <DropdownMenuItem>Delete</DropdownMenuItem>

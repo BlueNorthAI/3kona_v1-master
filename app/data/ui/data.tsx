@@ -7,25 +7,25 @@ import {
   CrossCircledIcon,
   QuestionMarkCircledIcon,
   StopwatchIcon,
-} from "@radix-ui/react-icons"
+} from "@radix-ui/react-icons";
 
 export const labels = [
   {
     value: "bug",
     label: "Bug",
-    color:"bg-red-100"
+    color: "bg-red-100",
   },
   {
     value: "feature",
     label: "Feature",
-    color:"bg-yellow-100"
+    color: "bg-yellow-100",
   },
   {
     value: "documentation",
     label: "Documentation",
-    color:"bg-green-100"
+    color: "bg-green-100",
   },
-]
+];
 
 export const statuses = [
   {
@@ -34,8 +34,8 @@ export const statuses = [
     icon: QuestionMarkCircledIcon,
   },
   {
-    value: "Sumbitted",
-    label:"Submitted",
+    value: "Submitted",
+    label: "Submitted",
     icon: CircleIcon,
   },
   {
@@ -53,7 +53,7 @@ export const statuses = [
     label: "Canceled",
     icon: CrossCircledIcon,
   },
-]
+];
 
 export const priorities = [
   {
@@ -71,4 +71,4 @@ export const priorities = [
     value: "high",
     icon: ArrowUpIcon,
   },
-]
+];
