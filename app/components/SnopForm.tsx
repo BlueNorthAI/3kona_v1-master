@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Link,
-  useLoaderData,
-  Form,
-  useNavigate,
-  useParams,
-} from "@remix-run/react";
+import { Link, Form, useNavigate, useParams } from "@remix-run/react";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import DemandInput from "~/components/demand-form";
@@ -15,14 +9,7 @@ import OutsourcingInput from "~/components/outcost-form";
 import ConstraintInput from "~/components/constraint-form";
 import EmpConstraintInput from "~/components/empconstraint-form";
 import ProductConstraintInput from "~/components/proconstraint-form";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { format } from "date-fns";
 import {
   Popover,
@@ -31,12 +18,8 @@ import {
 } from "~/components/ui/popover";
 import { Calendar } from "~/components/ui/calendar";
 import { ArrowUpTrayIcon, CalendarIcon } from "@heroicons/react/20/solid";
-import { getInput } from "~/models/input.server";
-import { createScenario } from "~/models/scenario.server";
-import { json, redirect } from "@remix-run/node";
 
 import { cn } from "~/lib/utils";
-import { typeToFlattenedError } from "zod";
 
 const navigation = [
   { id: 1, name: "S&OP", to: "/snop/optimize" },
