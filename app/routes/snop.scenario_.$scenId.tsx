@@ -52,11 +52,16 @@ export const loader = async ({ params }) => {
   return json({ scenarioData });
 };
 
-// export const action = async ({ request }) => {};
+export const action = async ({ request }) => {
+  const body = new URLSearchParams(await request.text());
+  console.log(body);
+  return json({ body });
+}
 
 export default function UpdateScenario() {
   const [date, setDate] = React.useState<Date>(new Date());
   const { scenarioData } = useLoaderData<typeof loader>();
+  const 
 
   return (
     <SnopForm inputData={scenarioData}/>

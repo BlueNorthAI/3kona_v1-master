@@ -2909,6 +2909,31 @@ async function getScenarioById(scenario_id) {
     }
   });
 }
+async function deleteScenarioById(scenario_id) {
+  return await prisma.snopScenario.delete({
+    where: {
+      scenario_id
+      // Assuming scenario_id is the unique identifier or primary key
+    }
+  });
+}
+async function duplicateScenario(scenarioId) {
+  let existingScenario = await prisma.snopScenario.findUnique({
+    where: {
+      scenario_id: scenarioId
+      // Assuming `scenario_id` is the unique identifier
+    }
+  });
+  if (!existingScenario)
+    throw new Error("Scenario not found");
+  let { id, scenario_id, CreatedAt, UpdatedAt, Status, ...restOfData } = existingScenario;
+  return await prisma.snopScenario.create({
+    data: {
+      ...restOfData,
+      Status: "Open"
+    }
+  });
+}
 
 // app/components/SnopForm.tsx
 var import_react14 = __toESM(require("react")), import_react15 = require("@remix-run/react");
@@ -4427,7 +4452,7 @@ function DemoContainer({
     !1,
     {
       fileName: "app/components/SnopForm.tsx",
-      lineNumber: 54,
+      lineNumber: 37,
       columnNumber: 5
     },
     this
@@ -4435,7 +4460,7 @@ function DemoContainer({
 }
 function SnopForm({ inputData }) {
   let [date, setDate] = import_react14.default.useState(/* @__PURE__ */ new Date()), navigate = (0, import_react15.useNavigate)(), params = (0, import_react15.useParams)();
-  return console.log(params.scenId), console.log(inputData), /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "m-2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(import_react15.Form, { method: "post", children: [
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "m-2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(import_react15.Form, { method: "post", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "mx-2 py-3.5 rounded-t-lg bg-sky-500 border-b ", children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(
       "nav",
       {
@@ -4452,13 +4477,13 @@ function SnopForm({ inputData }) {
           !1,
           {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 131,
+            lineNumber: 107,
             columnNumber: 17
           },
           this
         )) }, void 0, !1, {
           fileName: "app/components/SnopForm.tsx",
-          lineNumber: 129,
+          lineNumber: 105,
           columnNumber: 13
         }, this)
       },
@@ -4466,20 +4491,20 @@ function SnopForm({ inputData }) {
       !1,
       {
         fileName: "app/components/SnopForm.tsx",
-        lineNumber: 125,
+        lineNumber: 101,
         columnNumber: 11
       },
       this
     ) }, void 0, !1, {
       fileName: "app/components/SnopForm.tsx",
-      lineNumber: 124,
+      lineNumber: 100,
       columnNumber: 9
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "bg-white mx-2 shadow-md rounded-b-lg", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "flex items-center  justify-between", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("h2", { className: "text-3xl font-bold ml-4 p-2 text-transparent bg-clip-text   bg-gradient-to-r from-blue-700 via-sky-700 to-blue-700 font-display", children: "Sales & Operations Planning Input" }, void 0, !1, {
           fileName: "app/components/SnopForm.tsx",
-          lineNumber: 144,
+          lineNumber: 120,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "flex items-center ", children: [
@@ -4494,7 +4519,7 @@ function SnopForm({ inputData }) {
             !1,
             {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 148,
+              lineNumber: 124,
               columnNumber: 15
             },
             this
@@ -4511,7 +4536,7 @@ function SnopForm({ inputData }) {
             !1,
             {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 154,
+              lineNumber: 130,
               columnNumber: 15
             },
             this
@@ -4528,7 +4553,7 @@ function SnopForm({ inputData }) {
             !1,
             {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 160,
+              lineNumber: 136,
               columnNumber: 15
             },
             this
@@ -4545,7 +4570,7 @@ function SnopForm({ inputData }) {
             !1,
             {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 166,
+              lineNumber: 142,
               columnNumber: 15
             },
             this
@@ -4562,7 +4587,7 @@ function SnopForm({ inputData }) {
             !1,
             {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 172,
+              lineNumber: 148,
               columnNumber: 15
             },
             this
@@ -4579,16 +4604,16 @@ function SnopForm({ inputData }) {
                 children: [
                   /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(import_solid5.CalendarIcon, { className: "mr-2 h-4 w-4 text-blue-900" }, void 0, !1, {
                     fileName: "app/components/SnopForm.tsx",
-                    lineNumber: 187,
+                    lineNumber: 163,
                     columnNumber: 21
                   }, this),
                   date ? /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("span", { className: "text-blue-900", children: (0, import_date_fns.format)(date, "PPP") }, void 0, !1, {
                     fileName: "app/components/SnopForm.tsx",
-                    lineNumber: 189,
+                    lineNumber: 165,
                     columnNumber: 23
                   }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("span", { className: "text-blue-900", children: "Pick a date" }, void 0, !1, {
                     fileName: "app/components/SnopForm.tsx",
-                    lineNumber: 193,
+                    lineNumber: 169,
                     columnNumber: 23
                   }, this)
                 ]
@@ -4597,13 +4622,13 @@ function SnopForm({ inputData }) {
               !0,
               {
                 fileName: "app/components/SnopForm.tsx",
-                lineNumber: 180,
+                lineNumber: 156,
                 columnNumber: 19
               },
               this
             ) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 179,
+              lineNumber: 155,
               columnNumber: 17
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(PopoverContent, { className: "w-auto p-0 ", children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(
@@ -4619,59 +4644,59 @@ function SnopForm({ inputData }) {
               !1,
               {
                 fileName: "app/components/SnopForm.tsx",
-                lineNumber: 198,
+                lineNumber: 174,
                 columnNumber: 19
               },
               this
             ) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 197,
+              lineNumber: 173,
               columnNumber: 17
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 178,
+            lineNumber: 154,
             columnNumber: 15
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "ml-2 flex max-w-sm items-center", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(Input, { type: "file" }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 209,
+              lineNumber: 185,
               columnNumber: 17
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(Button, { className: "mr-4  p-1 rounded-md border bg-blue-500 hover:bg-blue-600", children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "flex items-center space-x-1 mx-2 ", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(import_solid5.ArrowUpTrayIcon, { className: "text-white h-5 w-5" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
-                lineNumber: 213,
+                lineNumber: 189,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("span", { className: "mx-1 text-sm p-1 text-white ", children: "Upload" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
-                lineNumber: 214,
+                lineNumber: 190,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 212,
+              lineNumber: 188,
               columnNumber: 19
             }, this) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 211,
+              lineNumber: 187,
               columnNumber: 17
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 208,
+            lineNumber: 184,
             columnNumber: 15
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/SnopForm.tsx",
-          lineNumber: 147,
+          lineNumber: 123,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/components/SnopForm.tsx",
-        lineNumber: 143,
+        lineNumber: 119,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "items-start justify-center gap-6 rounded-lg p-4 md:grid lg:grid-cols-2 xl:grid-cols-4", children: [
@@ -4679,44 +4704,44 @@ function SnopForm({ inputData }) {
           /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardHeader, { className: "space-y-1 ", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardTitle, { className: "text-2xl flex", children: "Demand" }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 225,
+              lineNumber: 201,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("p", { className: "text-gray-400 text-sm", children: "Units per month" }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 226,
+              lineNumber: 202,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "border-b" }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 227,
+              lineNumber: 203,
               columnNumber: 21
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 224,
+            lineNumber: 200,
             columnNumber: 19
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardContent, { className: "grid gap-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(DemandInput, { demands: inputData }, void 0, !1, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 231,
+            lineNumber: 207,
             columnNumber: 21
           }, this) }, void 0, !1, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 230,
+            lineNumber: 206,
             columnNumber: 19
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/SnopForm.tsx",
-          lineNumber: 223,
+          lineNumber: 199,
           columnNumber: 17
         }, this) }, void 0, !1, {
           fileName: "app/components/SnopForm.tsx",
-          lineNumber: 222,
+          lineNumber: 198,
           columnNumber: 15
         }, this) }, void 0, !1, {
           fileName: "app/components/SnopForm.tsx",
-          lineNumber: 221,
+          lineNumber: 197,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "col-span-2 grid items-start gap-6 lg:col-span-2 lg:grid-cols-2 xl:col-span-1 xl:grid-cols-1", children: [
@@ -4724,75 +4749,75 @@ function SnopForm({ inputData }) {
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardHeader, { className: "space-y-1", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardTitle, { className: "text-2xl", children: "Material & Inventory Cost" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
-                lineNumber: 241,
+                lineNumber: 217,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "border-b" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
-                lineNumber: 244,
+                lineNumber: 220,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 240,
+              lineNumber: 216,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardContent, { className: "grid gap-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CostInput, { cost: inputData }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 247,
+              lineNumber: 223,
               columnNumber: 21
             }, this) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 246,
+              lineNumber: 222,
               columnNumber: 19
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 239,
+            lineNumber: 215,
             columnNumber: 17
           }, this) }, void 0, !1, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 238,
+            lineNumber: 214,
             columnNumber: 15
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(DemoContainer, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(Card, { className: "shadow-lg text-blue-900", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardHeader, { className: "space-y-1", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardTitle, { className: "text-2xl", children: "Employee Cost" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
-                lineNumber: 254,
+                lineNumber: 230,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "border-b" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
-                lineNumber: 255,
+                lineNumber: 231,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 253,
+              lineNumber: 229,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardContent, { className: "grid gap-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CostInput2, { cost: inputData }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 258,
+              lineNumber: 234,
               columnNumber: 21
             }, this) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 257,
+              lineNumber: 233,
               columnNumber: 19
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 252,
+            lineNumber: 228,
             columnNumber: 17
           }, this) }, void 0, !1, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 251,
+            lineNumber: 227,
             columnNumber: 15
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/SnopForm.tsx",
-          lineNumber: 237,
+          lineNumber: 213,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "col-span-2 grid items-start gap-6 lg:col-span-2 lg:grid-cols-2 xl:col-span-1 xl:grid-cols-1", children: [
@@ -4800,75 +4825,75 @@ function SnopForm({ inputData }) {
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardHeader, { className: "space-y-1", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardTitle, { className: "text-2xl", children: "Outsourcing Cost" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
-                lineNumber: 268,
+                lineNumber: 244,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "border-b" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
-                lineNumber: 269,
+                lineNumber: 245,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 267,
+              lineNumber: 243,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardContent, { className: "grid gap-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CostInput3, { cost: inputData }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 272,
+              lineNumber: 248,
               columnNumber: 21
             }, this) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 271,
+              lineNumber: 247,
               columnNumber: 19
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 266,
+            lineNumber: 242,
             columnNumber: 17
           }, this) }, void 0, !1, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 265,
+            lineNumber: 241,
             columnNumber: 15
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(DemoContainer, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(Card, { className: "shadow-lg text-blue-900", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardHeader, { className: "space-y-1", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardTitle, { className: "text-2xl", children: "Inventory Constraint" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
-                lineNumber: 279,
+                lineNumber: 255,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "border-b" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
-                lineNumber: 282,
+                lineNumber: 258,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 278,
+              lineNumber: 254,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardContent, { className: "grid gap-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(ConstraintInput, { constraint: inputData }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 285,
+              lineNumber: 261,
               columnNumber: 21
             }, this) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 284,
+              lineNumber: 260,
               columnNumber: 19
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 277,
+            lineNumber: 253,
             columnNumber: 17
           }, this) }, void 0, !1, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 276,
+            lineNumber: 252,
             columnNumber: 15
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/SnopForm.tsx",
-          lineNumber: 264,
+          lineNumber: 240,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "col-span-2 grid items-start gap-6 lg:col-span-2 lg:grid-cols-2 xl:col-span-1 xl:grid-cols-1", children: [
@@ -4876,91 +4901,91 @@ function SnopForm({ inputData }) {
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardHeader, { className: "space-y-1", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardTitle, { className: "text-2xl", children: "Employee Constraint" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
-                lineNumber: 294,
+                lineNumber: 270,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "border-b" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
-                lineNumber: 297,
+                lineNumber: 273,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 293,
+              lineNumber: 269,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardContent, { className: "grid gap-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(ConstraintInput2, { constraint: inputData }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 300,
+              lineNumber: 276,
               columnNumber: 21
             }, this) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 299,
+              lineNumber: 275,
               columnNumber: 19
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 292,
+            lineNumber: 268,
             columnNumber: 17
           }, this) }, void 0, !1, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 291,
+            lineNumber: 267,
             columnNumber: 15
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(DemoContainer, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(Card, { className: "shadow-lg text-blue-900", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardHeader, { className: "space-y-1", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardTitle, { className: "text-2xl", children: "Product Constraint" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
-                lineNumber: 307,
+                lineNumber: 283,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "border-b" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
-                lineNumber: 310,
+                lineNumber: 286,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 306,
+              lineNumber: 282,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(CardContent, { className: "grid gap-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(ConstraintInput3, { constraint: inputData }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 313,
+              lineNumber: 289,
               columnNumber: 21
             }, this) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
-              lineNumber: 312,
+              lineNumber: 288,
               columnNumber: 19
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 305,
+            lineNumber: 281,
             columnNumber: 17
           }, this) }, void 0, !1, {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 304,
+            lineNumber: 280,
             columnNumber: 15
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/SnopForm.tsx",
-          lineNumber: 290,
+          lineNumber: 266,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/components/SnopForm.tsx",
-        lineNumber: 220,
+        lineNumber: 196,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "py-4 border-t flex justify-end space-x-2 mr-2", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(Button, { className: "bg-blue-500 hover:bg-blue-600", children: params.scenId ? "Update Scenario" : "Create Scenario" }, void 0, !1, {
           fileName: "app/components/SnopForm.tsx",
-          lineNumber: 321,
+          lineNumber: 297,
           columnNumber: 13
         }, this),
         params.scenId == null && /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(Button, { variant: "outline", children: "Save Input" }, void 0, !1, {
           fileName: "app/components/SnopForm.tsx",
-          lineNumber: 326,
+          lineNumber: 302,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { className: "mr-2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(
@@ -4976,32 +5001,32 @@ function SnopForm({ inputData }) {
           !1,
           {
             fileName: "app/components/SnopForm.tsx",
-            lineNumber: 329,
+            lineNumber: 305,
             columnNumber: 15
           },
           this
         ) }, void 0, !1, {
           fileName: "app/components/SnopForm.tsx",
-          lineNumber: 328,
+          lineNumber: 304,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/components/SnopForm.tsx",
-        lineNumber: 320,
+        lineNumber: 296,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/SnopForm.tsx",
-      lineNumber: 142,
+      lineNumber: 118,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/SnopForm.tsx",
-    lineNumber: 123,
+    lineNumber: 99,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/components/SnopForm.tsx",
-    lineNumber: 122,
+    lineNumber: 98,
     columnNumber: 5
   }, this);
 }
@@ -9174,7 +9199,7 @@ var import_jsx_dev_runtime49 = require("react/jsx-dev-runtime");
 function DataTableRowActions({
   row
 }) {
-  let task = taskSchema.parse(row.original);
+  let task = taskSchema.parse(row.original), fetcher = (0, import_react32.useFetcher)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(DropdownMenu, { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(DropdownMenuTrigger, { asChild: !0, children: /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(
       Button,
@@ -9185,12 +9210,12 @@ function DataTableRowActions({
         children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(import_react_icons6.DotsHorizontalIcon, { className: "h-4 w-4" }, void 0, !1, {
             fileName: "app/components/data-table-row-actions.tsx",
-            lineNumber: 41,
+            lineNumber: 42,
             columnNumber: 11
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)("span", { className: "sr-only", children: "Open menu" }, void 0, !1, {
             fileName: "app/components/data-table-row-actions.tsx",
-            lineNumber: 42,
+            lineNumber: 43,
             columnNumber: 11
           }, this)
         ]
@@ -9199,58 +9224,134 @@ function DataTableRowActions({
       !0,
       {
         fileName: "app/components/data-table-row-actions.tsx",
-        lineNumber: 36,
+        lineNumber: 37,
         columnNumber: 9
       },
       this
     ) }, void 0, !1, {
       fileName: "app/components/data-table-row-actions.tsx",
-      lineNumber: 35,
+      lineNumber: 36,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(DropdownMenuContent, { align: "end", className: "w-[140px]", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(import_react32.Link, { to: `/snop/scenario/${row.original.scenario_id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(DropdownMenuItem, { children: "Edit" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(
+        import_react32.Link,
+        {
+          to: `/snop/scenario/${row.original.scenario_id}`,
+          hidden: row.original.Status !== "Open",
+          children: /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(DropdownMenuItem, { children: "Edit" }, void 0, !1, {
+            fileName: "app/components/data-table-row-actions.tsx",
+            lineNumber: 51,
+            columnNumber: 11
+          }, this)
+        },
+        void 0,
+        !1,
+        {
+          fileName: "app/components/data-table-row-actions.tsx",
+          lineNumber: 47,
+          columnNumber: 9
+        },
+        this
+      ),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(DropdownMenuItem, { asChild: !0, children: /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(
+        "button",
+        {
+          type: "submit",
+          name: "intent",
+          value: "duplicate",
+          className: "w-full",
+          onClick: () => fetcher.submit(
+            { scenario_id: row.original.scenario_id, intent: "duplicate" },
+            { method: "post" }
+          ),
+          children: "Make a Copy"
+        },
+        void 0,
+        !1,
+        {
+          fileName: "app/components/data-table-row-actions.tsx",
+          lineNumber: 54,
+          columnNumber: 11
+        },
+        this
+      ) }, void 0, !1, {
         fileName: "app/components/data-table-row-actions.tsx",
-        lineNumber: 47,
-        columnNumber: 11
-      }, this) }, void 0, !1, {
-        fileName: "app/components/data-table-row-actions.tsx",
-        lineNumber: 46,
+        lineNumber: 53,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(DropdownMenuItem, { children: "Make a copy" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(DropdownMenuItem, { asChild: !0, children: /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(
+        "button",
+        {
+          type: "submit",
+          name: "intent",
+          value: "archive",
+          className: "w-full",
+          hidden: row.original.Status === "Open",
+          onClick: () => fetcher.submit(
+            { scenario_id: row.original.scenario_id, intent: "archive" },
+            { method: "post" }
+          ),
+          children: "Archive"
+        },
+        void 0,
+        !1,
+        {
+          fileName: "app/components/data-table-row-actions.tsx",
+          lineNumber: 70,
+          columnNumber: 11
+        },
+        this
+      ) }, void 0, !1, {
         fileName: "app/components/data-table-row-actions.tsx",
-        lineNumber: 49,
+        lineNumber: 69,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(DropdownMenuItem, { children: "Archive" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(DropdownMenuItem, { asChild: !0, children: /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(
+        "button",
+        {
+          type: "submit",
+          name: "intent",
+          value: "delete",
+          className: "w-full",
+          hidden: row.original.Status !== "Open",
+          onClick: () => fetcher.submit(
+            { scenario_id: row.original.scenario_id, intent: "delete" },
+            { method: "post" }
+          ),
+          children: "Delete"
+        },
+        void 0,
+        !1,
+        {
+          fileName: "app/components/data-table-row-actions.tsx",
+          lineNumber: 87,
+          columnNumber: 11
+        },
+        this
+      ) }, void 0, !1, {
         fileName: "app/components/data-table-row-actions.tsx",
-        lineNumber: 50,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(DropdownMenuItem, { children: "Delete" }, void 0, !1, {
-        fileName: "app/components/data-table-row-actions.tsx",
-        lineNumber: 51,
+        lineNumber: 86,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(DropdownMenuSeparator, {}, void 0, !1, {
         fileName: "app/components/data-table-row-actions.tsx",
-        lineNumber: 52,
+        lineNumber: 105,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime49.jsxDEV)(DropdownMenuItem, { children: "Analyze" }, void 0, !1, {
         fileName: "app/components/data-table-row-actions.tsx",
-        lineNumber: 53,
+        lineNumber: 106,
         columnNumber: 9
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/data-table-row-actions.tsx",
-      lineNumber: 45,
+      lineNumber: 46,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/data-table-row-actions.tsx",
-    lineNumber: 34,
+    lineNumber: 35,
     columnNumber: 5
   }, this);
 }
@@ -9261,7 +9362,7 @@ function DataTableRowSubmit({
   row
 }) {
   let task = taskSchema.parse(row.original), fetcher = (0, import_react33.useFetcher)();
-  return console.log("task", task), /* @__PURE__ */ (0, import_jsx_dev_runtime50.jsxDEV)(DropdownMenu, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime50.jsxDEV)(DropdownMenuTrigger, { asChild: !0, children: /* @__PURE__ */ (0, import_jsx_dev_runtime50.jsxDEV)(
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime50.jsxDEV)(DropdownMenu, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime50.jsxDEV)(DropdownMenuTrigger, { asChild: !0, children: /* @__PURE__ */ (0, import_jsx_dev_runtime50.jsxDEV)(
     Button,
     {
       className: "bg-blue-900 hover:bg-blue-800",
@@ -9275,7 +9376,7 @@ function DataTableRowSubmit({
         "Submit",
         /* @__PURE__ */ (0, import_jsx_dev_runtime50.jsxDEV)("span", { className: "sr-only", children: "Open menu" }, void 0, !1, {
           fileName: "app/components/data-table-row-submit.tsx",
-          lineNumber: 65,
+          lineNumber: 71,
           columnNumber: 11
         }, this)
       ]
@@ -9368,7 +9469,17 @@ var import_jsx_dev_runtime52 = require("react/jsx-dev-runtime"), Checkbox = Reac
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
 
 // app/components/columns.tsx
-var import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), columns = [
+var import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), formatDate = (dateString) => {
+  let date = new Date(dateString);
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+  }).format(date);
+}, columns = [
   {
     id: "select",
     header: ({ table }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(
@@ -9383,7 +9494,7 @@ var import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), columns = [
       !1,
       {
         fileName: "app/components/columns.tsx",
-        lineNumber: 17,
+        lineNumber: 30,
         columnNumber: 7
       },
       this
@@ -9400,7 +9511,7 @@ var import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), columns = [
       !1,
       {
         fileName: "app/components/columns.tsx",
-        lineNumber: 28,
+        lineNumber: 41,
         columnNumber: 7
       },
       this
@@ -9412,12 +9523,12 @@ var import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), columns = [
     accessorKey: "scenario_id",
     header: ({ column }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(DataTableColumnHeader, { column, title: "Scenario Id" }, void 0, !1, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 41,
+      lineNumber: 54,
       columnNumber: 7
     }, this),
     cell: ({ row }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)("div", { className: "w-[80px]", children: row.getValue("scenario_id") }, void 0, !1, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 44,
+      lineNumber: 57,
       columnNumber: 7
     }, this),
     enableSorting: !1,
@@ -9427,12 +9538,12 @@ var import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), columns = [
     accessorKey: "description",
     header: ({ column }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(DataTableColumnHeader, { column, title: "Description" }, void 0, !1, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 53,
+      lineNumber: 66,
       columnNumber: 7
     }, this),
     cell: ({ row }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)("span", { className: "w-[50px] truncate font-medium ", children: row.getValue("description") }, void 0, !1, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 57,
+      lineNumber: 70,
       columnNumber: 9
     }, this)
   },
@@ -9440,16 +9551,16 @@ var import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), columns = [
     accessorKey: "CreatedAt",
     header: ({ column }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(DataTableColumnHeader, { column, title: "Created Date" }, void 0, !1, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 66,
+      lineNumber: 79,
       columnNumber: 7
     }, this),
-    cell: ({ row }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(Badge, { variant: "outline", children: row.getValue("CreatedAt") }, void 0, !1, {
+    cell: ({ row }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(Badge, { variant: "outline", children: formatDate(row.getValue("CreatedAt")) }, void 0, !1, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 73,
+      lineNumber: 86,
       columnNumber: 11
     }, this) }, void 0, !1, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 72,
+      lineNumber: 85,
       columnNumber: 9
     }, this)
   },
@@ -9457,19 +9568,19 @@ var import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), columns = [
     accessorKey: "UpdatedAt",
     header: ({ column }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(DataTableColumnHeader, { column, title: "Updated Date" }, void 0, !1, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 81,
+      lineNumber: 96,
       columnNumber: 7
     }, this),
     cell: ({ row }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)("div", { children: [
       " ",
-      /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(Badge, { variant: "outline", children: row.getValue("UpdatedAt") }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(Badge, { variant: "outline", children: formatDate(row.getValue("UpdatedAt")) }, void 0, !1, {
         fileName: "app/components/columns.tsx",
-        lineNumber: 87,
+        lineNumber: 102,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 85,
+      lineNumber: 100,
       columnNumber: 9
     }, this)
   },
@@ -9477,16 +9588,16 @@ var import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), columns = [
     accessorKey: "module",
     header: ({ column }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(DataTableColumnHeader, { column, title: "Module" }, void 0, !1, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 96,
+      lineNumber: 113,
       columnNumber: 7
     }, this),
     cell: ({ row }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(Badge, { variant: "outline", className: "bg-green-100 text-green-900", children: row.getValue("module") }, void 0, !1, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 101,
+      lineNumber: 118,
       columnNumber: 11
     }, this) }, void 0, !1, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 100,
+      lineNumber: 117,
       columnNumber: 9
     }, this)
   },
@@ -9494,7 +9605,7 @@ var import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), columns = [
     accessorKey: "Status",
     header: ({ column }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(DataTableColumnHeader, { column, title: "Status" }, void 0, !1, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 111,
+      lineNumber: 128,
       columnNumber: 7
     }, this),
     cell: ({ row }) => {
@@ -9504,17 +9615,17 @@ var import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), columns = [
       return status ? /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)("div", { className: "flex w-[100px] items-center", children: [
         status.icon && /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(status.icon, { className: "mr-2 h-4 w-4 text-muted-foreground" }, void 0, !1, {
           fileName: "app/components/columns.tsx",
-          lineNumber: 125,
+          lineNumber: 142,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)("span", { children: status.label }, void 0, !1, {
           fileName: "app/components/columns.tsx",
-          lineNumber: 127,
+          lineNumber: 144,
           columnNumber: 11
         }, this)
       ] }, void 0, !0, {
         fileName: "app/components/columns.tsx",
-        lineNumber: 123,
+        lineNumber: 140,
         columnNumber: 9
       }, this) : null;
     },
@@ -9524,12 +9635,12 @@ var import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), columns = [
     id: "submit",
     header: ({ column }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(DataTableColumnHeader, { column, title: "Submit to Optimizer" }, void 0, !1, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 139,
+      lineNumber: 156,
       columnNumber: 7
     }, this),
     cell: ({ row }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(DataTableRowSubmit, { row }, void 0, !1, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 141,
+      lineNumber: 158,
       columnNumber: 24
     }, this)
   },
@@ -9537,12 +9648,12 @@ var import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), columns = [
     id: "actions",
     header: ({ column }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(DataTableColumnHeader, { column, title: "Actions" }, void 0, !1, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 146,
+      lineNumber: 163,
       columnNumber: 7
     }, this),
     cell: ({ row }) => /* @__PURE__ */ (0, import_jsx_dev_runtime53.jsxDEV)(DataTableRowActions, { row }, void 0, !1, {
       fileName: "app/components/columns.tsx",
-      lineNumber: 148,
+      lineNumber: 165,
       columnNumber: 24
     }, this)
   }
@@ -10710,7 +10821,7 @@ var import_node7 = require("@remix-run/node"), import_jsx_dev_runtime62 = requir
   return (0, import_node7.json)({ scenarioList });
 }, action3 = async ({ request }) => {
   let formData = await request.formData(), data2 = Object.fromEntries(formData), intent = formData.get("intent"), scenarioId = formData.get("scenario_id");
-  return intent === "optimize" && await updateScenario(scenarioId, "Submitted"), (0, import_node7.redirect)(".");
+  return console.log("Intent-->", intent), console.log("scenario id-->", scenarioId), intent === "optimize" && await updateScenario(scenarioId, "Submitted"), intent === "delete" && await deleteScenarioById(scenarioId), intent === "duplicate" && await duplicateScenario(scenarioId), (0, import_node7.redirect)(".");
 };
 function TaskPage() {
   let { scenarioList } = (0, import_react34.useLoaderData)();
@@ -10731,13 +10842,13 @@ function TaskPage() {
           !1,
           {
             fileName: "app/routes/snop.scenario.tsx",
-            lineNumber: 52,
+            lineNumber: 66,
             columnNumber: 17
           },
           this
         )) }, void 0, !1, {
           fileName: "app/routes/snop.scenario.tsx",
-          lineNumber: 50,
+          lineNumber: 64,
           columnNumber: 13
         }, this)
       },
@@ -10745,46 +10856,46 @@ function TaskPage() {
       !1,
       {
         fileName: "app/routes/snop.scenario.tsx",
-        lineNumber: 46,
+        lineNumber: 60,
         columnNumber: 11
       },
       this
     ) }, void 0, !1, {
       fileName: "app/routes/snop.scenario.tsx",
-      lineNumber: 45,
+      lineNumber: 59,
       columnNumber: 9
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime62.jsxDEV)("div", { className: "bg-white mx-2 shadow-md rounded-b-lg", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime62.jsxDEV)("div", { className: "flex items-center  justify-between", children: /* @__PURE__ */ (0, import_jsx_dev_runtime62.jsxDEV)("h2", { className: "text-3xl font-bold ml-4 p-2 text-transparent bg-clip-text   bg-gradient-to-r from-blue-700 via-sky-700 to-blue-700 font-display", children: "Sales & Operations Planning - List of Scenarios" }, void 0, !1, {
         fileName: "app/routes/snop.scenario.tsx",
-        lineNumber: 65,
+        lineNumber: 79,
         columnNumber: 13
       }, this) }, void 0, !1, {
         fileName: "app/routes/snop.scenario.tsx",
-        lineNumber: 64,
+        lineNumber: 78,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime62.jsxDEV)("div", { className: "m-4 bg-white rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime62.jsxDEV)(DataTable, { data: scenarioList, columns }, void 0, !1, {
         fileName: "app/routes/snop.scenario.tsx",
-        lineNumber: 71,
+        lineNumber: 85,
         columnNumber: 13
       }, this) }, void 0, !1, {
         fileName: "app/routes/snop.scenario.tsx",
-        lineNumber: 70,
+        lineNumber: 84,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/snop.scenario.tsx",
-      lineNumber: 63,
+      lineNumber: 77,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/snop.scenario.tsx",
-    lineNumber: 44,
+    lineNumber: 58,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/routes/snop.scenario.tsx",
-    lineNumber: 43,
+    lineNumber: 57,
     columnNumber: 5
   }, this);
 }
@@ -11959,7 +12070,7 @@ function RecentSales() {
   }, this);
 }
 
-// app/components/search.tsx
+// app/components/Search.tsx
 var import_jsx_dev_runtime71 = require("react/jsx-dev-runtime");
 function Search() {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime71.jsxDEV)(
@@ -11972,13 +12083,13 @@ function Search() {
     void 0,
     !1,
     {
-      fileName: "app/components/search.tsx",
+      fileName: "app/components/Search.tsx",
       lineNumber: 6,
       columnNumber: 7
     },
     this
   ) }, void 0, !1, {
-    fileName: "app/components/search.tsx",
+    fileName: "app/components/Search.tsx",
     lineNumber: 5,
     columnNumber: 5
   }, this);
@@ -12489,92 +12600,92 @@ function DashboardPage() {
     /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "border-b", children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "flex h-16 items-center px-4", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(TeamSwitcher, {}, void 0, !1, {
         fileName: "app/routes/snop.result.tsx",
-        lineNumber: 31,
+        lineNumber: 25,
         columnNumber: 15
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(MainNav, { className: "mx-6" }, void 0, !1, {
         fileName: "app/routes/snop.result.tsx",
-        lineNumber: 32,
+        lineNumber: 26,
         columnNumber: 15
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "ml-auto flex items-center space-x-4", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(Search, {}, void 0, !1, {
           fileName: "app/routes/snop.result.tsx",
-          lineNumber: 34,
+          lineNumber: 28,
           columnNumber: 17
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(UserNav, {}, void 0, !1, {
           fileName: "app/routes/snop.result.tsx",
-          lineNumber: 35,
+          lineNumber: 29,
           columnNumber: 17
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/snop.result.tsx",
-        lineNumber: 33,
+        lineNumber: 27,
         columnNumber: 15
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/snop.result.tsx",
-      lineNumber: 30,
+      lineNumber: 24,
       columnNumber: 13
     }, this) }, void 0, !1, {
       fileName: "app/routes/snop.result.tsx",
-      lineNumber: 29,
+      lineNumber: 23,
       columnNumber: 11
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "flex-1 space-y-4 p-8 pt-6", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "flex items-center justify-between space-y-2", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("h2", { className: "text-3xl font-bold tracking-tight", children: "Dashboard" }, void 0, !1, {
           fileName: "app/routes/snop.result.tsx",
-          lineNumber: 41,
+          lineNumber: 35,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "flex items-center space-x-2", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CalendarDateRangePicker, {}, void 0, !1, {
             fileName: "app/routes/snop.result.tsx",
-            lineNumber: 43,
+            lineNumber: 37,
             columnNumber: 17
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(Button, { children: "Download" }, void 0, !1, {
             fileName: "app/routes/snop.result.tsx",
-            lineNumber: 44,
+            lineNumber: 38,
             columnNumber: 17
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/snop.result.tsx",
-          lineNumber: 42,
+          lineNumber: 36,
           columnNumber: 15
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/snop.result.tsx",
-        lineNumber: 40,
+        lineNumber: 34,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(Tabs, { defaultValue: "overview", className: "space-y-4", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(TabsList, { children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(TabsTrigger, { value: "overview", children: "Overview" }, void 0, !1, {
             fileName: "app/routes/snop.result.tsx",
-            lineNumber: 49,
+            lineNumber: 43,
             columnNumber: 17
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(TabsTrigger, { value: "analytics", disabled: !0, children: "Analytics" }, void 0, !1, {
             fileName: "app/routes/snop.result.tsx",
-            lineNumber: 50,
+            lineNumber: 44,
             columnNumber: 17
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(TabsTrigger, { value: "reports", disabled: !0, children: "Reports" }, void 0, !1, {
             fileName: "app/routes/snop.result.tsx",
-            lineNumber: 53,
+            lineNumber: 47,
             columnNumber: 17
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(TabsTrigger, { value: "notifications", disabled: !0, children: "Notifications" }, void 0, !1, {
             fileName: "app/routes/snop.result.tsx",
-            lineNumber: 56,
+            lineNumber: 50,
             columnNumber: 17
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/snop.result.tsx",
-          lineNumber: 48,
+          lineNumber: 42,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(TabsContent, { value: "overview", className: "space-y-4", children: [
@@ -12583,7 +12694,7 @@ function DashboardPage() {
               /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardHeader, { className: "flex flex-row items-center justify-between space-y-0 pb-2", children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardTitle, { className: "text-sm font-medium", children: "Total Revenue" }, void 0, !1, {
                   fileName: "app/routes/snop.result.tsx",
-                  lineNumber: 64,
+                  lineNumber: 58,
                   columnNumber: 23
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(
@@ -12599,7 +12710,7 @@ function DashboardPage() {
                     className: "h-4 w-4 text-muted-foreground",
                     children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("path", { d: "M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" }, void 0, !1, {
                       fileName: "app/routes/snop.result.tsx",
-                      lineNumber: 77,
+                      lineNumber: 71,
                       columnNumber: 25
                     }, this)
                   },
@@ -12607,42 +12718,42 @@ function DashboardPage() {
                   !1,
                   {
                     fileName: "app/routes/snop.result.tsx",
-                    lineNumber: 67,
+                    lineNumber: 61,
                     columnNumber: 23
                   },
                   this
                 )
               ] }, void 0, !0, {
                 fileName: "app/routes/snop.result.tsx",
-                lineNumber: 63,
+                lineNumber: 57,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardContent, { children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "text-2xl font-bold", children: "$45,231.89" }, void 0, !1, {
                   fileName: "app/routes/snop.result.tsx",
-                  lineNumber: 81,
+                  lineNumber: 75,
                   columnNumber: 23
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("p", { className: "text-xs text-muted-foreground", children: "+20.1% from last month" }, void 0, !1, {
                   fileName: "app/routes/snop.result.tsx",
-                  lineNumber: 82,
+                  lineNumber: 76,
                   columnNumber: 23
                 }, this)
               ] }, void 0, !0, {
                 fileName: "app/routes/snop.result.tsx",
-                lineNumber: 80,
+                lineNumber: 74,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/routes/snop.result.tsx",
-              lineNumber: 62,
+              lineNumber: 56,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(Card, { children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardHeader, { className: "flex flex-row items-center justify-between space-y-0 pb-2", children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardTitle, { className: "text-sm font-medium", children: "Subscriptions" }, void 0, !1, {
                   fileName: "app/routes/snop.result.tsx",
-                  lineNumber: 89,
+                  lineNumber: 83,
                   columnNumber: 23
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(
@@ -12659,17 +12770,17 @@ function DashboardPage() {
                     children: [
                       /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("path", { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" }, void 0, !1, {
                         fileName: "app/routes/snop.result.tsx",
-                        lineNumber: 102,
+                        lineNumber: 96,
                         columnNumber: 25
                       }, this),
                       /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("circle", { cx: "9", cy: "7", r: "4" }, void 0, !1, {
                         fileName: "app/routes/snop.result.tsx",
-                        lineNumber: 103,
+                        lineNumber: 97,
                         columnNumber: 25
                       }, this),
                       /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("path", { d: "M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" }, void 0, !1, {
                         fileName: "app/routes/snop.result.tsx",
-                        lineNumber: 104,
+                        lineNumber: 98,
                         columnNumber: 25
                       }, this)
                     ]
@@ -12678,42 +12789,42 @@ function DashboardPage() {
                   !0,
                   {
                     fileName: "app/routes/snop.result.tsx",
-                    lineNumber: 92,
+                    lineNumber: 86,
                     columnNumber: 23
                   },
                   this
                 )
               ] }, void 0, !0, {
                 fileName: "app/routes/snop.result.tsx",
-                lineNumber: 88,
+                lineNumber: 82,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardContent, { children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "text-2xl font-bold", children: "+2350" }, void 0, !1, {
                   fileName: "app/routes/snop.result.tsx",
-                  lineNumber: 108,
+                  lineNumber: 102,
                   columnNumber: 23
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("p", { className: "text-xs text-muted-foreground", children: "+180.1% from last month" }, void 0, !1, {
                   fileName: "app/routes/snop.result.tsx",
-                  lineNumber: 109,
+                  lineNumber: 103,
                   columnNumber: 23
                 }, this)
               ] }, void 0, !0, {
                 fileName: "app/routes/snop.result.tsx",
-                lineNumber: 107,
+                lineNumber: 101,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/routes/snop.result.tsx",
-              lineNumber: 87,
+              lineNumber: 81,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(Card, { children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardHeader, { className: "flex flex-row items-center justify-between space-y-0 pb-2", children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardTitle, { className: "text-sm font-medium", children: "Sales" }, void 0, !1, {
                   fileName: "app/routes/snop.result.tsx",
-                  lineNumber: 116,
+                  lineNumber: 110,
                   columnNumber: 23
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(
@@ -12730,12 +12841,12 @@ function DashboardPage() {
                     children: [
                       /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("rect", { width: "20", height: "14", x: "2", y: "5", rx: "2" }, void 0, !1, {
                         fileName: "app/routes/snop.result.tsx",
-                        lineNumber: 129,
+                        lineNumber: 123,
                         columnNumber: 25
                       }, this),
                       /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("path", { d: "M2 10h20" }, void 0, !1, {
                         fileName: "app/routes/snop.result.tsx",
-                        lineNumber: 130,
+                        lineNumber: 124,
                         columnNumber: 25
                       }, this)
                     ]
@@ -12744,42 +12855,42 @@ function DashboardPage() {
                   !0,
                   {
                     fileName: "app/routes/snop.result.tsx",
-                    lineNumber: 119,
+                    lineNumber: 113,
                     columnNumber: 23
                   },
                   this
                 )
               ] }, void 0, !0, {
                 fileName: "app/routes/snop.result.tsx",
-                lineNumber: 115,
+                lineNumber: 109,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardContent, { children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "text-2xl font-bold", children: "+12,234" }, void 0, !1, {
                   fileName: "app/routes/snop.result.tsx",
-                  lineNumber: 134,
+                  lineNumber: 128,
                   columnNumber: 23
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("p", { className: "text-xs text-muted-foreground", children: "+19% from last month" }, void 0, !1, {
                   fileName: "app/routes/snop.result.tsx",
-                  lineNumber: 135,
+                  lineNumber: 129,
                   columnNumber: 23
                 }, this)
               ] }, void 0, !0, {
                 fileName: "app/routes/snop.result.tsx",
-                lineNumber: 133,
+                lineNumber: 127,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/routes/snop.result.tsx",
-              lineNumber: 114,
+              lineNumber: 108,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(Card, { children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardHeader, { className: "flex flex-row items-center justify-between space-y-0 pb-2", children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardTitle, { className: "text-sm font-medium", children: "Active Now" }, void 0, !1, {
                   fileName: "app/routes/snop.result.tsx",
-                  lineNumber: 142,
+                  lineNumber: 136,
                   columnNumber: 23
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(
@@ -12795,7 +12906,7 @@ function DashboardPage() {
                     className: "h-4 w-4 text-muted-foreground",
                     children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("path", { d: "M22 12h-4l-3 9L9 3l-3 9H2" }, void 0, !1, {
                       fileName: "app/routes/snop.result.tsx",
-                      lineNumber: 155,
+                      lineNumber: 149,
                       columnNumber: 25
                     }, this)
                   },
@@ -12803,129 +12914,129 @@ function DashboardPage() {
                   !1,
                   {
                     fileName: "app/routes/snop.result.tsx",
-                    lineNumber: 145,
+                    lineNumber: 139,
                     columnNumber: 23
                   },
                   this
                 )
               ] }, void 0, !0, {
                 fileName: "app/routes/snop.result.tsx",
-                lineNumber: 141,
+                lineNumber: 135,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardContent, { children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "text-2xl font-bold", children: "+573" }, void 0, !1, {
                   fileName: "app/routes/snop.result.tsx",
-                  lineNumber: 159,
+                  lineNumber: 153,
                   columnNumber: 23
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("p", { className: "text-xs text-muted-foreground", children: "+201 since last hour" }, void 0, !1, {
                   fileName: "app/routes/snop.result.tsx",
-                  lineNumber: 160,
+                  lineNumber: 154,
                   columnNumber: 23
                 }, this)
               ] }, void 0, !0, {
                 fileName: "app/routes/snop.result.tsx",
-                lineNumber: 158,
+                lineNumber: 152,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/routes/snop.result.tsx",
-              lineNumber: 140,
+              lineNumber: 134,
               columnNumber: 19
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/snop.result.tsx",
-            lineNumber: 61,
+            lineNumber: 55,
             columnNumber: 17
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)("div", { className: "grid gap-4 md:grid-cols-2 lg:grid-cols-7", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(Card, { className: "col-span-4", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardHeader, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardTitle, { children: "Overview" }, void 0, !1, {
                 fileName: "app/routes/snop.result.tsx",
-                lineNumber: 169,
+                lineNumber: 163,
                 columnNumber: 23
               }, this) }, void 0, !1, {
                 fileName: "app/routes/snop.result.tsx",
-                lineNumber: 168,
+                lineNumber: 162,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardContent, { className: "pl-2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(Overview, {}, void 0, !1, {
                 fileName: "app/routes/snop.result.tsx",
-                lineNumber: 172,
+                lineNumber: 166,
                 columnNumber: 23
               }, this) }, void 0, !1, {
                 fileName: "app/routes/snop.result.tsx",
-                lineNumber: 171,
+                lineNumber: 165,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/routes/snop.result.tsx",
-              lineNumber: 167,
+              lineNumber: 161,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(Card, { className: "col-span-3", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardHeader, { children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardTitle, { children: "Recent Sales" }, void 0, !1, {
                   fileName: "app/routes/snop.result.tsx",
-                  lineNumber: 177,
+                  lineNumber: 171,
                   columnNumber: 23
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardDescription, { children: "You made 265 sales this month." }, void 0, !1, {
                   fileName: "app/routes/snop.result.tsx",
-                  lineNumber: 178,
+                  lineNumber: 172,
                   columnNumber: 23
                 }, this)
               ] }, void 0, !0, {
                 fileName: "app/routes/snop.result.tsx",
-                lineNumber: 176,
+                lineNumber: 170,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(CardContent, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime74.jsxDEV)(RecentSales, {}, void 0, !1, {
                 fileName: "app/routes/snop.result.tsx",
-                lineNumber: 183,
+                lineNumber: 177,
                 columnNumber: 23
               }, this) }, void 0, !1, {
                 fileName: "app/routes/snop.result.tsx",
-                lineNumber: 182,
+                lineNumber: 176,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/routes/snop.result.tsx",
-              lineNumber: 175,
+              lineNumber: 169,
               columnNumber: 19
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/snop.result.tsx",
-            lineNumber: 166,
+            lineNumber: 160,
             columnNumber: 17
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/snop.result.tsx",
-          lineNumber: 60,
+          lineNumber: 54,
           columnNumber: 15
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/snop.result.tsx",
-        lineNumber: 47,
+        lineNumber: 41,
         columnNumber: 13
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/snop.result.tsx",
-      lineNumber: 39,
+      lineNumber: 33,
       columnNumber: 11
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/snop.result.tsx",
-    lineNumber: 28,
+    lineNumber: 22,
     columnNumber: 9
   }, this) }, void 0, !1, {
     fileName: "app/routes/snop.result.tsx",
-    lineNumber: 27,
+    lineNumber: 21,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/routes/snop.result.tsx",
-    lineNumber: 26,
+    lineNumber: 20,
     columnNumber: 5
   }, this);
 }
@@ -13261,9 +13372,9 @@ var loader6 = async () => {
 };
 function SnopInput() {
   let [date, setDate] = import_react41.default.useState(/* @__PURE__ */ new Date()), { snopInput } = (0, import_react42.useLoaderData)(), navigate = (0, import_react42.useNavigate)();
-  return console.log(snopInput), /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)(SnopForm, { inputData: snopInput }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime77.jsxDEV)(SnopForm, { inputData: snopInput }, void 0, !1, {
     fileName: "app/routes/snop.input.tsx",
-    lineNumber: 99,
+    lineNumber: 98,
     columnNumber: 5
   }, this);
 }
@@ -18315,7 +18426,7 @@ function Sidebar() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/build/entry.client-FJBYXCFU.js", imports: ["/build/_shared/chunk-ZWGWGGVF.js", "/build/_shared/chunk-ZVVJ5DIP.js", "/build/_shared/chunk-GIAAE3CH.js", "/build/_shared/chunk-XU7DNSPJ.js", "/build/_shared/chunk-MEDZ44IS.js", "/build/_shared/chunk-UWV35TSL.js", "/build/_shared/chunk-BOXFZXVX.js", "/build/_shared/chunk-PNG5AS42.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-ERFCYVK6.js", imports: ["/build/_shared/chunk-DMZCSMEQ.js", "/build/_shared/chunk-G7CHZRZX.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-KQE3642W.js", imports: ["/build/_shared/chunk-2VZUH2EY.js", "/build/_shared/chunk-EC4QPT3H.js", "/build/_shared/chunk-Y3Q3TNJF.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-JKKPAHGM.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard": { id: "routes/dashboard", parentId: "root", path: "dashboard", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard-CPVIPNOO.js", imports: ["/build/_shared/chunk-Y3Q3TNJF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/demo.chatbackup": { id: "routes/demo.chatbackup", parentId: "root", path: "demo/chatbackup", index: void 0, caseSensitive: void 0, module: "/build/routes/demo.chatbackup-HLSPX27F.js", imports: ["/build/_shared/chunk-OH3J6KOJ.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/demo.gpt": { id: "routes/demo.gpt", parentId: "root", path: "demo/gpt", index: void 0, caseSensitive: void 0, module: "/build/routes/demo.gpt-5DMJ3KPK.js", imports: void 0, hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/healthcheck": { id: "routes/healthcheck", parentId: "root", path: "healthcheck", index: void 0, caseSensitive: void 0, module: "/build/routes/healthcheck-UKIBAX2W.js", imports: void 0, hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/join": { id: "routes/join", parentId: "root", path: "join", index: void 0, caseSensitive: void 0, module: "/build/routes/join-GI7HFUCY.js", imports: ["/build/_shared/chunk-G3ACJGOK.js", "/build/_shared/chunk-CNUX32M4.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-AOVSCBTV.js", imports: ["/build/_shared/chunk-G3ACJGOK.js", "/build/_shared/chunk-CNUX32M4.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/logout": { id: "routes/logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/logout-GGSXPJWV.js", imports: void 0, hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/notes": { id: "routes/notes", parentId: "root", path: "notes", index: void 0, caseSensitive: void 0, module: "/build/routes/notes-HDN2CJTB.js", imports: ["/build/_shared/chunk-CNUX32M4.js", "/build/_shared/chunk-2LJDV4EM.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/notes.$noteId": { id: "routes/notes.$noteId", parentId: "routes/notes", path: ":noteId", index: void 0, caseSensitive: void 0, module: "/build/routes/notes.$noteId-RN7DNBKR.js", imports: ["/build/_shared/chunk-IYD4CINF.js", "/build/_shared/chunk-DMZCSMEQ.js", "/build/_shared/chunk-G7CHZRZX.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !0 }, "routes/notes._index": { id: "routes/notes._index", parentId: "routes/notes", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/notes._index-JBP6XX2V.js", imports: void 0, hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/notes.new": { id: "routes/notes.new", parentId: "routes/notes", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/notes.new-JHJVUXFH.js", imports: ["/build/_shared/chunk-DMZCSMEQ.js", "/build/_shared/chunk-G7CHZRZX.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop": { id: "routes/snop", parentId: "root", path: "snop", index: void 0, caseSensitive: void 0, module: "/build/routes/snop-J5GOJX6D.js", imports: ["/build/_shared/chunk-2VZUH2EY.js", "/build/_shared/chunk-WLB7K45O.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.chat": { id: "routes/snop.chat", parentId: "routes/snop", path: "chat", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.chat-RGVYFLZX.js", imports: ["/build/_shared/chunk-L4UBQWNJ.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.chatchart": { id: "routes/snop.chatchart", parentId: "routes/snop", path: "chatchart", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.chatchart-DVSXVJIN.js", imports: ["/build/_shared/chunk-L4UBQWNJ.js", "/build/_shared/chunk-7UUGZQUL.js", "/build/_shared/chunk-N3WEPD7Z.js", "/build/_shared/chunk-EFKQI77X.js", "/build/_shared/chunk-TZVNLAUT.js", "/build/_shared/chunk-VM7DCUCB.js", "/build/_shared/chunk-OH52VQQI.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.clean": { id: "routes/snop.clean", parentId: "routes/snop", path: "clean", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.clean-LIIBSLZK.js", imports: void 0, hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.dashboard.campaign": { id: "routes/snop.dashboard.campaign", parentId: "routes/snop", path: "dashboard/campaign", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.dashboard.campaign-SKIGP7ZW.js", imports: ["/build/_shared/chunk-DUAIL3HA.js", "/build/_shared/chunk-N3WEPD7Z.js", "/build/_shared/chunk-OH52VQQI.js", "/build/_shared/chunk-56MKNIDO.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.dashboard.finance": { id: "routes/snop.dashboard.finance", parentId: "routes/snop", path: "dashboard/finance", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.dashboard.finance-W6WFJU6L.js", imports: ["/build/_shared/chunk-ZNCGOUJM.js", "/build/_shared/chunk-N3WEPD7Z.js", "/build/_shared/chunk-TZVNLAUT.js", "/build/_shared/chunk-VM7DCUCB.js", "/build/_shared/chunk-OH52VQQI.js", "/build/_shared/chunk-56MKNIDO.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.dashboard.inventory": { id: "routes/snop.dashboard.inventory", parentId: "routes/snop", path: "dashboard/inventory", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.dashboard.inventory-O2LVRGGI.js", imports: ["/build/_shared/chunk-N3WEPD7Z.js", "/build/_shared/chunk-EFKQI77X.js", "/build/_shared/chunk-TZVNLAUT.js", "/build/_shared/chunk-VM7DCUCB.js", "/build/_shared/chunk-56MKNIDO.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.dashboard.overview": { id: "routes/snop.dashboard.overview", parentId: "routes/snop", path: "dashboard/overview", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.dashboard.overview-A4JPMO52.js", imports: ["/build/_shared/chunk-DUAIL3HA.js", "/build/_shared/chunk-ZNCGOUJM.js", "/build/_shared/chunk-N3WEPD7Z.js", "/build/_shared/chunk-EFKQI77X.js", "/build/_shared/chunk-TZVNLAUT.js", "/build/_shared/chunk-VM7DCUCB.js", "/build/_shared/chunk-OH52VQQI.js", "/build/_shared/chunk-56MKNIDO.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.dashboard.sales": { id: "routes/snop.dashboard.sales", parentId: "routes/snop", path: "dashboard/sales", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.dashboard.sales-D7W2W2FN.js", imports: ["/build/_shared/chunk-DUAIL3HA.js", "/build/_shared/chunk-VM7DCUCB.js", "/build/_shared/chunk-OH52VQQI.js", "/build/_shared/chunk-56MKNIDO.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.dashboard.spend": { id: "routes/snop.dashboard.spend", parentId: "routes/snop", path: "dashboard/spend", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.dashboard.spend-PXSOXFIE.js", imports: ["/build/_shared/chunk-N3WEPD7Z.js", "/build/_shared/chunk-EFKQI77X.js", "/build/_shared/chunk-VM7DCUCB.js", "/build/_shared/chunk-OH52VQQI.js", "/build/_shared/chunk-56MKNIDO.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.dashboard.supply": { id: "routes/snop.dashboard.supply", parentId: "routes/snop", path: "dashboard/supply", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.dashboard.supply-JDMSCZJP.js", imports: ["/build/_shared/chunk-EFKQI77X.js", "/build/_shared/chunk-TZVNLAUT.js", "/build/_shared/chunk-VM7DCUCB.js", "/build/_shared/chunk-OH52VQQI.js", "/build/_shared/chunk-56MKNIDO.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.demand": { id: "routes/snop.demand", parentId: "routes/snop", path: "demand", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.demand-6NGF6TQ2.js", imports: ["/build/_shared/chunk-EC4QPT3H.js", "/build/_shared/chunk-7UUGZQUL.js", "/build/_shared/chunk-N3WEPD7Z.js", "/build/_shared/chunk-EFKQI77X.js", "/build/_shared/chunk-TZVNLAUT.js", "/build/_shared/chunk-VM7DCUCB.js", "/build/_shared/chunk-OH52VQQI.js", "/build/_shared/chunk-56MKNIDO.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.input": { id: "routes/snop.input", parentId: "routes/snop", path: "input", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.input-4XXJWAZQ.js", imports: ["/build/_shared/chunk-AUZDLWEP.js", "/build/_shared/chunk-OESJ757L.js", "/build/_shared/chunk-2YHQU5X6.js", "/build/_shared/chunk-PAYI5ADR.js", "/build/_shared/chunk-T5F5GXJC.js", "/build/_shared/chunk-TAH65X5V.js", "/build/_shared/chunk-2NVTJMAP.js", "/build/_shared/chunk-AZ2ABKPG.js", "/build/_shared/chunk-Y3Q3TNJF.js", "/build/_shared/chunk-G7CHZRZX.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.optimize": { id: "routes/snop.optimize", parentId: "routes/snop", path: "optimize", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.optimize-2H3K3MYN.js", imports: ["/build/_shared/chunk-U4UP5LIE.js", "/build/_shared/chunk-PAYI5ADR.js", "/build/_shared/chunk-2NVTJMAP.js", "/build/_shared/chunk-AZ2ABKPG.js", "/build/_shared/chunk-Y3Q3TNJF.js", "/build/_shared/chunk-G7CHZRZX.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.result": { id: "routes/snop.result", parentId: "routes/snop", path: "result", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.result-OCNK7D5J.js", imports: ["/build/_shared/chunk-IYD4CINF.js", "/build/_shared/chunk-BYUAI66E.js", "/build/_shared/chunk-BFVQSGSR.js", "/build/_shared/chunk-U4UP5LIE.js", "/build/_shared/chunk-OESJ757L.js", "/build/_shared/chunk-2YHQU5X6.js", "/build/_shared/chunk-PAYI5ADR.js", "/build/_shared/chunk-TAH65X5V.js", "/build/_shared/chunk-2NVTJMAP.js", "/build/_shared/chunk-AZ2ABKPG.js", "/build/_shared/chunk-Y3Q3TNJF.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.scenario": { id: "routes/snop.scenario", parentId: "routes/snop", path: "scenario", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.scenario-FMPHUOGV.js", imports: ["/build/_shared/chunk-BYUAI66E.js", "/build/_shared/chunk-C3GB7RDK.js", "/build/_shared/chunk-BFVQSGSR.js", "/build/_shared/chunk-U4UP5LIE.js", "/build/_shared/chunk-T5F5GXJC.js", "/build/_shared/chunk-TAH65X5V.js", "/build/_shared/chunk-2NVTJMAP.js", "/build/_shared/chunk-AZ2ABKPG.js", "/build/_shared/chunk-Y3Q3TNJF.js", "/build/_shared/chunk-G7CHZRZX.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.scenario_.$scenId": { id: "routes/snop.scenario_.$scenId", parentId: "routes/snop", path: "scenario/:scenId", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.scenario_.$scenId-4DQRG43J.js", imports: ["/build/_shared/chunk-AUZDLWEP.js", "/build/_shared/chunk-OESJ757L.js", "/build/_shared/chunk-2YHQU5X6.js", "/build/_shared/chunk-PAYI5ADR.js", "/build/_shared/chunk-T5F5GXJC.js", "/build/_shared/chunk-TAH65X5V.js", "/build/_shared/chunk-2NVTJMAP.js", "/build/_shared/chunk-AZ2ABKPG.js", "/build/_shared/chunk-Y3Q3TNJF.js", "/build/_shared/chunk-G7CHZRZX.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.table": { id: "routes/snop.table", parentId: "routes/snop", path: "table", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.table-W75YGGNR.js", imports: ["/build/_shared/chunk-NMZL6IDN.js", "/build/_shared/chunk-C3GB7RDK.js", "/build/_shared/chunk-AZ2ABKPG.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.truck": { id: "routes/snop.truck", parentId: "routes/snop", path: "truck", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.truck-IR4J7FSL.js", imports: ["/build/_shared/chunk-BFVQSGSR.js", "/build/_shared/chunk-2YHQU5X6.js", "/build/_shared/chunk-PAYI5ADR.js", "/build/_shared/chunk-TAH65X5V.js", "/build/_shared/chunk-2NVTJMAP.js", "/build/_shared/chunk-AZ2ABKPG.js", "/build/_shared/chunk-Y3Q3TNJF.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "0bdd05cf", hmr: { runtime: "/build/_shared\\chunk-MEDZ44IS.js", timestamp: 1708501719459 }, url: "/build/manifest-0BDD05CF.js" };
+var assets_manifest_default = { entry: { module: "/build/entry.client-FJBYXCFU.js", imports: ["/build/_shared/chunk-ZWGWGGVF.js", "/build/_shared/chunk-ZVVJ5DIP.js", "/build/_shared/chunk-GIAAE3CH.js", "/build/_shared/chunk-XU7DNSPJ.js", "/build/_shared/chunk-MEDZ44IS.js", "/build/_shared/chunk-UWV35TSL.js", "/build/_shared/chunk-BOXFZXVX.js", "/build/_shared/chunk-PNG5AS42.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-ERFCYVK6.js", imports: ["/build/_shared/chunk-DMZCSMEQ.js", "/build/_shared/chunk-G7CHZRZX.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-KQE3642W.js", imports: ["/build/_shared/chunk-2VZUH2EY.js", "/build/_shared/chunk-EC4QPT3H.js", "/build/_shared/chunk-Y3Q3TNJF.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-JKKPAHGM.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard": { id: "routes/dashboard", parentId: "root", path: "dashboard", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard-CPVIPNOO.js", imports: ["/build/_shared/chunk-Y3Q3TNJF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/demo.chatbackup": { id: "routes/demo.chatbackup", parentId: "root", path: "demo/chatbackup", index: void 0, caseSensitive: void 0, module: "/build/routes/demo.chatbackup-HLSPX27F.js", imports: ["/build/_shared/chunk-OH3J6KOJ.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/demo.gpt": { id: "routes/demo.gpt", parentId: "root", path: "demo/gpt", index: void 0, caseSensitive: void 0, module: "/build/routes/demo.gpt-5DMJ3KPK.js", imports: void 0, hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/healthcheck": { id: "routes/healthcheck", parentId: "root", path: "healthcheck", index: void 0, caseSensitive: void 0, module: "/build/routes/healthcheck-UKIBAX2W.js", imports: void 0, hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/join": { id: "routes/join", parentId: "root", path: "join", index: void 0, caseSensitive: void 0, module: "/build/routes/join-GI7HFUCY.js", imports: ["/build/_shared/chunk-G3ACJGOK.js", "/build/_shared/chunk-CNUX32M4.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-AOVSCBTV.js", imports: ["/build/_shared/chunk-G3ACJGOK.js", "/build/_shared/chunk-CNUX32M4.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/logout": { id: "routes/logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/logout-GGSXPJWV.js", imports: void 0, hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/notes": { id: "routes/notes", parentId: "root", path: "notes", index: void 0, caseSensitive: void 0, module: "/build/routes/notes-HDN2CJTB.js", imports: ["/build/_shared/chunk-CNUX32M4.js", "/build/_shared/chunk-2LJDV4EM.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/notes.$noteId": { id: "routes/notes.$noteId", parentId: "routes/notes", path: ":noteId", index: void 0, caseSensitive: void 0, module: "/build/routes/notes.$noteId-RN7DNBKR.js", imports: ["/build/_shared/chunk-IYD4CINF.js", "/build/_shared/chunk-DMZCSMEQ.js", "/build/_shared/chunk-G7CHZRZX.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !0 }, "routes/notes._index": { id: "routes/notes._index", parentId: "routes/notes", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/notes._index-JBP6XX2V.js", imports: void 0, hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/notes.new": { id: "routes/notes.new", parentId: "routes/notes", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/notes.new-JHJVUXFH.js", imports: ["/build/_shared/chunk-DMZCSMEQ.js", "/build/_shared/chunk-G7CHZRZX.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop": { id: "routes/snop", parentId: "root", path: "snop", index: void 0, caseSensitive: void 0, module: "/build/routes/snop-J5GOJX6D.js", imports: ["/build/_shared/chunk-2VZUH2EY.js", "/build/_shared/chunk-WLB7K45O.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.chat": { id: "routes/snop.chat", parentId: "routes/snop", path: "chat", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.chat-RGVYFLZX.js", imports: ["/build/_shared/chunk-L4UBQWNJ.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.chatchart": { id: "routes/snop.chatchart", parentId: "routes/snop", path: "chatchart", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.chatchart-DVSXVJIN.js", imports: ["/build/_shared/chunk-L4UBQWNJ.js", "/build/_shared/chunk-7UUGZQUL.js", "/build/_shared/chunk-N3WEPD7Z.js", "/build/_shared/chunk-EFKQI77X.js", "/build/_shared/chunk-TZVNLAUT.js", "/build/_shared/chunk-VM7DCUCB.js", "/build/_shared/chunk-OH52VQQI.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.clean": { id: "routes/snop.clean", parentId: "routes/snop", path: "clean", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.clean-LIIBSLZK.js", imports: void 0, hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.dashboard.campaign": { id: "routes/snop.dashboard.campaign", parentId: "routes/snop", path: "dashboard/campaign", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.dashboard.campaign-SKIGP7ZW.js", imports: ["/build/_shared/chunk-DUAIL3HA.js", "/build/_shared/chunk-N3WEPD7Z.js", "/build/_shared/chunk-OH52VQQI.js", "/build/_shared/chunk-56MKNIDO.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.dashboard.finance": { id: "routes/snop.dashboard.finance", parentId: "routes/snop", path: "dashboard/finance", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.dashboard.finance-W6WFJU6L.js", imports: ["/build/_shared/chunk-ZNCGOUJM.js", "/build/_shared/chunk-N3WEPD7Z.js", "/build/_shared/chunk-TZVNLAUT.js", "/build/_shared/chunk-VM7DCUCB.js", "/build/_shared/chunk-OH52VQQI.js", "/build/_shared/chunk-56MKNIDO.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.dashboard.inventory": { id: "routes/snop.dashboard.inventory", parentId: "routes/snop", path: "dashboard/inventory", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.dashboard.inventory-O2LVRGGI.js", imports: ["/build/_shared/chunk-N3WEPD7Z.js", "/build/_shared/chunk-EFKQI77X.js", "/build/_shared/chunk-TZVNLAUT.js", "/build/_shared/chunk-VM7DCUCB.js", "/build/_shared/chunk-56MKNIDO.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.dashboard.overview": { id: "routes/snop.dashboard.overview", parentId: "routes/snop", path: "dashboard/overview", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.dashboard.overview-A4JPMO52.js", imports: ["/build/_shared/chunk-DUAIL3HA.js", "/build/_shared/chunk-ZNCGOUJM.js", "/build/_shared/chunk-N3WEPD7Z.js", "/build/_shared/chunk-EFKQI77X.js", "/build/_shared/chunk-TZVNLAUT.js", "/build/_shared/chunk-VM7DCUCB.js", "/build/_shared/chunk-OH52VQQI.js", "/build/_shared/chunk-56MKNIDO.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.dashboard.sales": { id: "routes/snop.dashboard.sales", parentId: "routes/snop", path: "dashboard/sales", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.dashboard.sales-D7W2W2FN.js", imports: ["/build/_shared/chunk-DUAIL3HA.js", "/build/_shared/chunk-VM7DCUCB.js", "/build/_shared/chunk-OH52VQQI.js", "/build/_shared/chunk-56MKNIDO.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.dashboard.spend": { id: "routes/snop.dashboard.spend", parentId: "routes/snop", path: "dashboard/spend", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.dashboard.spend-PXSOXFIE.js", imports: ["/build/_shared/chunk-N3WEPD7Z.js", "/build/_shared/chunk-EFKQI77X.js", "/build/_shared/chunk-VM7DCUCB.js", "/build/_shared/chunk-OH52VQQI.js", "/build/_shared/chunk-56MKNIDO.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.dashboard.supply": { id: "routes/snop.dashboard.supply", parentId: "routes/snop", path: "dashboard/supply", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.dashboard.supply-JDMSCZJP.js", imports: ["/build/_shared/chunk-EFKQI77X.js", "/build/_shared/chunk-TZVNLAUT.js", "/build/_shared/chunk-VM7DCUCB.js", "/build/_shared/chunk-OH52VQQI.js", "/build/_shared/chunk-56MKNIDO.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.demand": { id: "routes/snop.demand", parentId: "routes/snop", path: "demand", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.demand-6NGF6TQ2.js", imports: ["/build/_shared/chunk-EC4QPT3H.js", "/build/_shared/chunk-7UUGZQUL.js", "/build/_shared/chunk-N3WEPD7Z.js", "/build/_shared/chunk-EFKQI77X.js", "/build/_shared/chunk-TZVNLAUT.js", "/build/_shared/chunk-VM7DCUCB.js", "/build/_shared/chunk-OH52VQQI.js", "/build/_shared/chunk-56MKNIDO.js", "/build/_shared/chunk-EL4ICYCD.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-X4JIH5W5.js", "/build/_shared/chunk-ZHRRJYGJ.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ZSUFT5EU.js", "/build/_shared/chunk-JKKPAHGM.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.input": { id: "routes/snop.input", parentId: "routes/snop", path: "input", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.input-DLXLQ3NQ.js", imports: ["/build/_shared/chunk-AQCFHFK4.js", "/build/_shared/chunk-OESJ757L.js", "/build/_shared/chunk-2YHQU5X6.js", "/build/_shared/chunk-PAYI5ADR.js", "/build/_shared/chunk-T5F5GXJC.js", "/build/_shared/chunk-TAH65X5V.js", "/build/_shared/chunk-2NVTJMAP.js", "/build/_shared/chunk-AZ2ABKPG.js", "/build/_shared/chunk-Y3Q3TNJF.js", "/build/_shared/chunk-G7CHZRZX.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.optimize": { id: "routes/snop.optimize", parentId: "routes/snop", path: "optimize", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.optimize-2H3K3MYN.js", imports: ["/build/_shared/chunk-U4UP5LIE.js", "/build/_shared/chunk-PAYI5ADR.js", "/build/_shared/chunk-2NVTJMAP.js", "/build/_shared/chunk-AZ2ABKPG.js", "/build/_shared/chunk-Y3Q3TNJF.js", "/build/_shared/chunk-G7CHZRZX.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.result": { id: "routes/snop.result", parentId: "routes/snop", path: "result", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.result-EPLIO6GD.js", imports: ["/build/_shared/chunk-IYD4CINF.js", "/build/_shared/chunk-BYUAI66E.js", "/build/_shared/chunk-BFVQSGSR.js", "/build/_shared/chunk-U4UP5LIE.js", "/build/_shared/chunk-OESJ757L.js", "/build/_shared/chunk-2YHQU5X6.js", "/build/_shared/chunk-PAYI5ADR.js", "/build/_shared/chunk-TAH65X5V.js", "/build/_shared/chunk-2NVTJMAP.js", "/build/_shared/chunk-AZ2ABKPG.js", "/build/_shared/chunk-Y3Q3TNJF.js", "/build/_shared/chunk-H6ZGEDNT.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.scenario": { id: "routes/snop.scenario", parentId: "routes/snop", path: "scenario", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.scenario-OEFMOFM5.js", imports: ["/build/_shared/chunk-BYUAI66E.js", "/build/_shared/chunk-C3GB7RDK.js", "/build/_shared/chunk-BFVQSGSR.js", "/build/_shared/chunk-U4UP5LIE.js", "/build/_shared/chunk-T5F5GXJC.js", "/build/_shared/chunk-TAH65X5V.js", "/build/_shared/chunk-2NVTJMAP.js", "/build/_shared/chunk-AZ2ABKPG.js", "/build/_shared/chunk-Y3Q3TNJF.js", "/build/_shared/chunk-G7CHZRZX.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.scenario_.$scenId": { id: "routes/snop.scenario_.$scenId", parentId: "routes/snop", path: "scenario/:scenId", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.scenario_.$scenId-7PHM4PGC.js", imports: ["/build/_shared/chunk-AQCFHFK4.js", "/build/_shared/chunk-OESJ757L.js", "/build/_shared/chunk-2YHQU5X6.js", "/build/_shared/chunk-PAYI5ADR.js", "/build/_shared/chunk-T5F5GXJC.js", "/build/_shared/chunk-TAH65X5V.js", "/build/_shared/chunk-2NVTJMAP.js", "/build/_shared/chunk-AZ2ABKPG.js", "/build/_shared/chunk-Y3Q3TNJF.js", "/build/_shared/chunk-G7CHZRZX.js", "/build/_shared/chunk-OH3J6KOJ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.table": { id: "routes/snop.table", parentId: "routes/snop", path: "table", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.table-W75YGGNR.js", imports: ["/build/_shared/chunk-NMZL6IDN.js", "/build/_shared/chunk-C3GB7RDK.js", "/build/_shared/chunk-AZ2ABKPG.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/snop.truck": { id: "routes/snop.truck", parentId: "routes/snop", path: "truck", index: void 0, caseSensitive: void 0, module: "/build/routes/snop.truck-IR4J7FSL.js", imports: ["/build/_shared/chunk-BFVQSGSR.js", "/build/_shared/chunk-2YHQU5X6.js", "/build/_shared/chunk-PAYI5ADR.js", "/build/_shared/chunk-TAH65X5V.js", "/build/_shared/chunk-2NVTJMAP.js", "/build/_shared/chunk-AZ2ABKPG.js", "/build/_shared/chunk-Y3Q3TNJF.js", "/build/_shared/chunk-DFGEPVYF.js", "/build/_shared/chunk-ZQSOIJBR.js", "/build/_shared/chunk-HEETWZQQ.js", "/build/_shared/chunk-ELWJTL4F.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "4f8c0f1b", hmr: { runtime: "/build/_shared\\chunk-MEDZ44IS.js", timestamp: 1708584062435 }, url: "/build/manifest-4F8C0F1B.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var mode = "development", assetsBuildDirectory = "public\\build", future = { v3_fetcherPersist: !1, v3_relativeSplatPath: !1, v3_throwAbortReason: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

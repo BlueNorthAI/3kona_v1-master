@@ -6,20 +6,14 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "~/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { CalendarDateRangePicker } from "~/components/date-range-picker";
 import { MainNav } from "~/components/main-nav";
 import { Overview } from "~/components/overview";
 import { RecentSales } from "~/components/recent-sales";
-import { Search } from "~/components/search";
+import { Search } from "~/components/Search";
 import TeamSwitcher from "~/components/team-switcher";
 import { UserNav } from "~/components/user-nav";
-
 
 export default function DashboardPage() {
   return (

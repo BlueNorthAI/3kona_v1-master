@@ -9,6 +9,19 @@ import { DataTableRowActions } from "./data-table-row-actions";
 import { DataTableRowSubmit } from "./data-table-row-submit";
 import { Badge } from "./ui/badge";
 import { Checkbox } from "./ui/checkbox";
+// import { format } from "date-fns";
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: '2-digit', 
+    hour: '2-digit', 
+    minute: '2-digit', 
+    second: '2-digit' 
+  }).format(date);
+}
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -70,7 +83,9 @@ export const columns: ColumnDef<Task>[] = [
 
       return (
         <div>
-          <Badge variant="outline">{row.getValue("CreatedAt")}</Badge>
+          <Badge variant="outline">
+            {formatDate(row.getValue("CreatedAt"))}
+          </Badge>
         </div>
       );
     },
@@ -84,7 +99,9 @@ export const columns: ColumnDef<Task>[] = [
       return (
         <div>
           {" "}
-          <Badge variant="outline">{row.getValue("UpdatedAt")}</Badge>
+          <Badge variant="outline">
+            {formatDate(row.getValue("UpdatedAt"))}
+          </Badge>
         </div>
       );
     },

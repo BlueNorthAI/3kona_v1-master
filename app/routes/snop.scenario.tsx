@@ -2,7 +2,12 @@ import { Link, useLoaderData, Form, useNavigate } from "@remix-run/react";
 import { columns } from "../components/columns";
 import { DataTable } from "../components/data-table";
 import table from "../data/ui/tasks.json";
-import { getScenarioItems, updateScenario } from "~/models/scenario.server";
+import {
+  getScenarioItems,
+  updateScenario,
+  deleteScenarioById,
+  duplicateScenario,
+} from "~/models/scenario.server";
 import { json, redirect } from "@remix-run/node";
 import { Button } from "../components/ui/button";
 
@@ -28,9 +33,18 @@ export const action = async ({ request }) => {
   const data = Object.fromEntries(formData);
   const intent = formData.get("intent");
   const scenarioId = formData.get("scenario_id");
+  console.log("Intent-->", intent);
+  console.log("scenario id-->", scenarioId);
   if (intent === "optimize") {
     await updateScenario(scenarioId, "Submitted");
   }
+  if (intent === "delete") {
+    await deleteScenarioById(scenarioId);
+  }
+  if (intent === "duplicate") {
+    await duplicateScenario(scenarioId);
+  }
+
   return redirect(".");
   // if (intent === 'optimize'){
   //   await updateScenario()

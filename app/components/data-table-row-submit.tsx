@@ -33,7 +33,7 @@ export function DataTableRowSubmit<TData>({
   const fetcher = useFetcher();
   // console.log("selected row", row);
   // console.log("row id selected", row.getIsSelected().valueOf)
-  console.log("task", task);
+  // console.log("task", task);
 
   return (
     <DropdownMenu>
@@ -50,7 +50,13 @@ export function DataTableRowSubmit<TData>({
         {/* // <Form method="post"> */}
         <Button
           className="bg-blue-900 hover:bg-blue-800"
-          disabled={row.getIsSelected() ? (row.original.Status === "Open" ? false : true) : true}
+          disabled={
+            row.getIsSelected()
+              ? row.original.Status === "Open"
+                ? false
+                : true
+              : true
+          }
           // name="intent"
           // value="optimize"
           type="submit"

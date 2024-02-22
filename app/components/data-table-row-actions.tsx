@@ -5,7 +5,7 @@ import { Row } from "@tanstack/react-table";
 
 import { labels } from "../data/ui/data";
 import { taskSchema } from "../data/ui/schema";
-import { Link } from "@remix-run/react";
+import { Form, Link, useFetcher } from "@remix-run/react";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -29,6 +29,7 @@ export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
   const task = taskSchema.parse(row.original);
+  const fetcher = useFetcher();
 
   return (
     <DropdownMenu>
@@ -43,12 +44,64 @@ export function DataTableRowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[140px]">
-        <Link to={`/snop/scenario/${row.original.scenario_id}`}>
+        <Link
+          to={`/snop/scenario/${row.original.scenario_id}`}
+          hidden={row.original.Status !== "Open"}
+        >
           <DropdownMenuItem>Edit</DropdownMenuItem>
         </Link>
-        <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Archive</DropdownMenuItem>
-        <DropdownMenuItem>Delete</DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <button
+            type="submit"
+            name="intent"
+            value="duplicate"
+            className="w-full"
+            onClick={() =>
+              fetcher.submit(
+                { scenario_id: row.original.scenario_id, intent: "duplicate" },
+                { method: "post" },
+              )
+            }
+          >
+            Make a Copy
+          </button>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <button
+            type="submit"
+            name="intent"
+            value="archive"
+            className="w-full"
+            hidden={row.original.Status === "Open"}
+            onClick={() =>
+              fetcher.submit(
+                { scenario_id: row.original.scenario_id, intent: "archive" },
+                { method: "post" },
+              )
+            }
+          >
+            Archive
+          </button>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <button
+            type="submit"
+            name="intent"
+            value="delete"
+            className="w-full"
+            hidden={row.original.Status !== "Open"}
+            onClick={() =>
+              fetcher.submit(
+                { scenario_id: row.original.scenario_id, intent: "delete" },
+                { method: "post" },
+              )
+            }
+          >
+            Delete
+          </button>
+        </DropdownMenuItem>
+        
+
         <DropdownMenuSeparator />
         <DropdownMenuItem>Analyze</DropdownMenuItem>
       </DropdownMenuContent>
