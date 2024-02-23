@@ -17,7 +17,7 @@ const Fallback = () => {
   };
 
 export default function WrapperMultiColumnChart({category, series}){
-    return typeof document !== "undefined" ? <MultiColumnChartContainer categories={category} series={series} /> : <Fallback />
+    return typeof document !== "undefined" ? <MultiColumnChartContainer categories={category} series={series}  /> : <Fallback />
 }
 
 // export function WrapperQuadColumnChart({category, first, second, third, fourth,name}){

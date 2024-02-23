@@ -7,26 +7,30 @@ import {
 import "hammerjs";
 
 
-export function ColumnColorChartContainer({seriesData}){
-    return (
-      <>
-        <div>
-          <div>
-            <Chart style={{  height: 250 }}>
-              <ChartSeries>
-                <ChartSeriesItem
-                  data={seriesData}
-                  type="column"
-                  field="data"
-                  categoryField="categories"
-                />
-              </ChartSeries>
-            </Chart>
-          </div>
-        
-        </div>
-      </>
-    );
+export function ColumnColorChartContainer({ categories, series,color }) {
+  return (
+    <>
+      <Chart style={{ height: 250 }}>
+        {/* <ChartTitle text="Units sold" /> */}
+        <ChartLegend position="top" orientation="horizontal" />
+        <ChartCategoryAxis>
+          <ChartCategoryAxisItem categories={categories} />
+        </ChartCategoryAxis>
+
+        <ChartSeries>
+          {series.map((s) => (
+            <ChartSeriesItem
+              name={s.name}
+              data={s.data}
+              type="column"
+              key={s.name}
+              color={s.color}
+            />
+          ))}
+        </ChartSeries>
+      </Chart>
+    </>
+  );
 };
   
 

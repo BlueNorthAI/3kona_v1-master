@@ -91,16 +91,9 @@ function convertToNumbers(obj) {
 
 export default function SnopForm({ inputData }) {
   const [date, setDate] = React.useState<Date>(new Date());
-  //   const { snopInput } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
   const params = useParams();
-  console.log(params.scenId);
 
-  console.log(inputData);
-  // const { demands, constraint, cost } = useLoaderData<typeof loader>();
-  // console.log("demands", demands);
-  // console.log("constraint", constraint);
-  // console.log("cost", cost);
   return (
     <div className="m-2">
       <Form method="post">

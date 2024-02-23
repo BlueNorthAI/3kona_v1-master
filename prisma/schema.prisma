@@ -74,7 +74,7 @@ model PlanInput {
 
 model SnopScenario {
   id                    Int       @id @default(autoincrement())
-  scenario_id           String?   @unique
+  scenario_id           String?
   description           String?
   CreatedAt             DateTime? @default(now())
   UpdatedAt             DateTime? @default(now())
@@ -115,4 +115,48 @@ model SnopScenario {
   max_end_workers       Int?
 
   @@map("SNOP_SCENARIO")
+}
+
+model  snop_archive {
+  id                    Int       @id @default(autoincrement())
+  scenario_id           String?
+  description           String?
+  CreatedAt             DateTime? @default(now())
+  UpdatedAt             DateTime? @default(now())
+  module                String?   @default("Sales & Operations Planning")
+  Status                String?
+  customer              String
+  site                  String
+  sku                   String
+  Jan                   Int?
+  Feb                   Int?
+  Mar                   Int?
+  Apr                   Int?
+  May                   Int?
+  Jun                   Int?
+  Jul                   Int?
+  Aug                   Int?
+  Sep                   Int?
+  Oct                   Int?
+  Nov                   Int?
+  Dec                   Int?
+  material_cost_pu      Int?
+  inv_hold_cost_pupm    Int?
+  stockout_cost_pupm    Int?
+  hiring_cost_pw        Int?
+  firing_cost_pw        Int?
+  labor_hrs_pu          Int?
+  worker_cost_pm        Int?
+  overtime_cost_phr     Int?
+  outsourcing_cost_pu   Int?
+  max_work_hrs_pwpm     Int?
+  max_overtime_hrs_pwpm Int?
+  inventory_start       Int?
+  inventory_end         Int?
+  backlog_start         Int?
+  backlog_end           Int?
+  num_workers_start     Int?
+  min_end_workers       Int?
+  max_end_workers       Int?
+  @@map("SNOP_ARCHIVE")
 }

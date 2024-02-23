@@ -85,7 +85,7 @@ export const action = async ({ request }) => {
   const formData = await request.formData();
   const updates = convertToNumbers(Object.fromEntries(formData));
   await createScenario(updates);
-// console.log(updates)
+  // console.log(updates)
   return redirect(`/snop/scenario`);
 };
 
@@ -93,10 +93,9 @@ export default function SnopInput() {
   const [date, setDate] = React.useState<Date>(new Date());
   const { snopInput } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
-  console.log(snopInput)
-  
+
   return (
-    <SnopForm inputData={snopInput}/>
+    <SnopForm inputData={snopInput} />
     // <div className="m-2">
     //   <Form method="post">
     //     <div className="mx-2 py-3.5 rounded-t-lg bg-sky-500 border-b ">

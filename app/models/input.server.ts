@@ -2,8 +2,10 @@ import type { PlanInput } from "@prisma/client";
 
 import { prisma } from "~/db.server";
 
-export function getInput( ) {
-  return prisma.planInput.findFirst();
+export function getInput() {
+    
+  return prisma.PlanInput.findFirst();
+  
 }
 
 // export function getNoteListItems({ userId }: { userId: User["id"] }) {

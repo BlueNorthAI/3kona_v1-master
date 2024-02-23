@@ -44,6 +44,11 @@ export const statuses = [
     icon: StopwatchIcon,
   },
   {
+    value: "Archived",
+    label: "Archived",
+    icon: StopwatchIcon,
+  },
+  {
     value: "Completed",
     label: "Completed",
     icon: CheckCircledIcon,

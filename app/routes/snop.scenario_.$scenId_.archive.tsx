@@ -7,10 +7,10 @@ import {
   updateScenario,
   deleteScenarioById,
   duplicateScenario,
-  archiveSenario
+  getScenarioArchiveItems
 } from "~/models/scenario.server";
-import { json, redirect } from "@remix-run/node";
 
+import { json, redirect } from "@remix-run/node";
 
 const navigation = [
   { id: 1, name: "S&OP", to: "/snop/optimize" },
@@ -21,10 +21,10 @@ const navigation = [
 ];
 
 export const loader = async () => {
-  const scenarioList = await getScenarioItems();
-  // console.log(scenarioList);
+  const scenarioArchiveList = await getScenarioArchiveItems();
+  console.log(`archive`,scenarioArchiveList);
 
-  return json({ scenarioList });
+  return json({ scenarioArchiveList });
 };
 
 export const action = async ({ request }) => {
@@ -43,10 +43,6 @@ export const action = async ({ request }) => {
   if (intent === "duplicate") {
     await duplicateScenario(scenarioId);
   }
-   if (intent === "archive") {
-     await updateScenario(scenarioId, "Archived");
-     await archiveSenario(scenarioId);
-  }
 
   return redirect(".");
   // if (intent === 'optimize'){
@@ -54,8 +50,8 @@ export const action = async ({ request }) => {
   // }
 };
 
-export default function TaskPage() {
-  const { scenarioList } = useLoaderData<typeof loader>();
+export default function ArchivePage() {
+  const { scenarioArchiveList } = useLoaderData<typeof loader>();
   return (
     <>
       <div className="m-2">
@@ -80,12 +76,12 @@ export default function TaskPage() {
         <div className="bg-white mx-2 shadow-md rounded-b-lg">
           <div className="flex items-center  justify-between">
             <h2 className="text-3xl font-bold ml-4 p-2 text-transparent bg-clip-text   bg-gradient-to-r from-blue-700 via-sky-700 to-blue-700 font-display">
-              Sales & Operations Planning - List of Scenarios
+              Sales & Operations Planning - List of Archive
             </h2>
           </div>
 
           <div className="m-4 bg-white rounded-lg p-4">
-            <DataTable data={scenarioList} columns={columns} />
+            <DataTable data={scenarioArchiveList} columns={columns} />
           </div>
         </div>
       </div>

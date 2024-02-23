@@ -23,7 +23,7 @@ export default function ConstraintInput({ constraint }) {
     "November",
     "December",
   ];
-
+ 
   function getMonthName(monthNumber) {
     return monthNames[monthNumber - 1];
   }
