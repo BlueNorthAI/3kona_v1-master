@@ -86,6 +86,9 @@ export const columns: ColumnDef<Task>[] = [
           <Badge variant="outline">
             {formatDate(row.getValue("CreatedAt"))}
           </Badge>
+          <Badge variant="outline">
+            {formatDate(row.getValue("CreatedAt"))}
+          </Badge>
         </div>
       );
     },
@@ -99,6 +102,9 @@ export const columns: ColumnDef<Task>[] = [
       return (
         <div>
           {" "}
+          <Badge variant="outline">
+            {formatDate(row.getValue("UpdatedAt"))}
+          </Badge>
           <Badge variant="outline">
             {formatDate(row.getValue("UpdatedAt"))}
           </Badge>

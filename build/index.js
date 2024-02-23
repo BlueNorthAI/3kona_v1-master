@@ -7278,6 +7278,7 @@ function DemoContainer2({
     {
       fileName: "app/components/SnopForm.tsx",
       lineNumber: 37,
+      lineNumber: 37,
       columnNumber: 5
     },
     this
@@ -7303,11 +7304,13 @@ function SnopForm({ inputData }) {
           {
             fileName: "app/components/SnopForm.tsx",
             lineNumber: 107,
+            lineNumber: 107,
             columnNumber: 17
           },
           this
         )) }, void 0, !1, {
           fileName: "app/components/SnopForm.tsx",
+          lineNumber: 105,
           lineNumber: 105,
           columnNumber: 13
         }, this)
@@ -7317,11 +7320,13 @@ function SnopForm({ inputData }) {
       {
         fileName: "app/components/SnopForm.tsx",
         lineNumber: 101,
+        lineNumber: 101,
         columnNumber: 11
       },
       this
     ) }, void 0, !1, {
       fileName: "app/components/SnopForm.tsx",
+      lineNumber: 100,
       lineNumber: 100,
       columnNumber: 9
     }, this),
@@ -7329,6 +7334,7 @@ function SnopForm({ inputData }) {
       /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("div", { className: "flex items-center  justify-between", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("h2", { className: "text-3xl font-bold ml-4 p-2 text-transparent bg-clip-text   bg-gradient-to-r from-blue-700 via-sky-700 to-blue-700 font-display", children: "Sales & Operations Planning Input" }, void 0, !1, {
           fileName: "app/components/SnopForm.tsx",
+          lineNumber: 120,
           lineNumber: 120,
           columnNumber: 13
         }, this),
@@ -7344,6 +7350,7 @@ function SnopForm({ inputData }) {
             !1,
             {
               fileName: "app/components/SnopForm.tsx",
+              lineNumber: 124,
               lineNumber: 124,
               columnNumber: 15
             },
@@ -7362,6 +7369,7 @@ function SnopForm({ inputData }) {
             {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 130,
+              lineNumber: 130,
               columnNumber: 15
             },
             this
@@ -7378,6 +7386,7 @@ function SnopForm({ inputData }) {
             !1,
             {
               fileName: "app/components/SnopForm.tsx",
+              lineNumber: 136,
               lineNumber: 136,
               columnNumber: 15
             },
@@ -7396,6 +7405,7 @@ function SnopForm({ inputData }) {
             {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 142,
+              lineNumber: 142,
               columnNumber: 15
             },
             this
@@ -7412,6 +7422,7 @@ function SnopForm({ inputData }) {
             !1,
             {
               fileName: "app/components/SnopForm.tsx",
+              lineNumber: 148,
               lineNumber: 148,
               columnNumber: 15
             },
@@ -7430,14 +7441,17 @@ function SnopForm({ inputData }) {
                   /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(import_solid5.CalendarIcon, { className: "mr-2 h-4 w-4 text-blue-900" }, void 0, !1, {
                     fileName: "app/components/SnopForm.tsx",
                     lineNumber: 163,
+                    lineNumber: 163,
                     columnNumber: 21
                   }, this),
                   date ? /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("span", { className: "text-blue-900", children: (0, import_date_fns.format)(date, "PPP") }, void 0, !1, {
                     fileName: "app/components/SnopForm.tsx",
                     lineNumber: 165,
+                    lineNumber: 165,
                     columnNumber: 23
                   }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("span", { className: "text-blue-900", children: "Pick a date" }, void 0, !1, {
                     fileName: "app/components/SnopForm.tsx",
+                    lineNumber: 169,
                     lineNumber: 169,
                     columnNumber: 23
                   }, this)
@@ -7448,11 +7462,13 @@ function SnopForm({ inputData }) {
               {
                 fileName: "app/components/SnopForm.tsx",
                 lineNumber: 156,
+                lineNumber: 156,
                 columnNumber: 19
               },
               this
             ) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
+              lineNumber: 155,
               lineNumber: 155,
               columnNumber: 17
             }, this),
@@ -7470,16 +7486,19 @@ function SnopForm({ inputData }) {
               {
                 fileName: "app/components/SnopForm.tsx",
                 lineNumber: 174,
+                lineNumber: 174,
                 columnNumber: 19
               },
               this
             ) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 173,
+              lineNumber: 173,
               columnNumber: 17
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
+            lineNumber: 154,
             lineNumber: 154,
             columnNumber: 15
           }, this),
@@ -7487,40 +7506,48 @@ function SnopForm({ inputData }) {
             /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(Input, { type: "file" }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 185,
+              lineNumber: 185,
               columnNumber: 17
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(Button, { className: "mr-4  p-1 rounded-md border bg-blue-500 hover:bg-blue-600", children: /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("div", { className: "flex items-center space-x-1 mx-2 ", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(import_solid5.ArrowUpTrayIcon, { className: "text-white h-5 w-5" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
                 lineNumber: 189,
+                lineNumber: 189,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("span", { className: "mx-1 text-sm p-1 text-white ", children: "Upload" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
+                lineNumber: 190,
                 lineNumber: 190,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 188,
+              lineNumber: 188,
               columnNumber: 19
             }, this) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
+              lineNumber: 187,
               lineNumber: 187,
               columnNumber: 17
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
             lineNumber: 184,
+            lineNumber: 184,
             columnNumber: 15
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/SnopForm.tsx",
           lineNumber: 123,
+          lineNumber: 123,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/components/SnopForm.tsx",
+        lineNumber: 119,
         lineNumber: 119,
         columnNumber: 11
       }, this),
@@ -7530,42 +7557,51 @@ function SnopForm({ inputData }) {
             /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CardTitle, { className: "text-2xl flex", children: "Demand" }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 201,
+              lineNumber: 201,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("p", { className: "text-gray-400 text-sm", children: "Units per month" }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
+              lineNumber: 202,
               lineNumber: 202,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("div", { className: "border-b" }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 203,
+              lineNumber: 203,
               columnNumber: 21
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
+            lineNumber: 200,
             lineNumber: 200,
             columnNumber: 19
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CardContent, { className: "grid gap-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(DemandInput, { demands: inputData }, void 0, !1, {
             fileName: "app/components/SnopForm.tsx",
             lineNumber: 207,
+            lineNumber: 207,
             columnNumber: 21
           }, this) }, void 0, !1, {
             fileName: "app/components/SnopForm.tsx",
+            lineNumber: 206,
             lineNumber: 206,
             columnNumber: 19
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/SnopForm.tsx",
           lineNumber: 199,
+          lineNumber: 199,
           columnNumber: 17
         }, this) }, void 0, !1, {
           fileName: "app/components/SnopForm.tsx",
           lineNumber: 198,
+          lineNumber: 198,
           columnNumber: 15
         }, this) }, void 0, !1, {
           fileName: "app/components/SnopForm.tsx",
+          lineNumber: 197,
           lineNumber: 197,
           columnNumber: 13
         }, this),
@@ -7575,33 +7611,40 @@ function SnopForm({ inputData }) {
               /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CardTitle, { className: "text-2xl", children: "Material & Inventory Cost" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
                 lineNumber: 217,
+                lineNumber: 217,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("div", { className: "border-b" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
+                lineNumber: 220,
                 lineNumber: 220,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 216,
+              lineNumber: 216,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CardContent, { className: "grid gap-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CostInput, { cost: inputData }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 223,
+              lineNumber: 223,
               columnNumber: 21
             }, this) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
+              lineNumber: 222,
               lineNumber: 222,
               columnNumber: 19
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
             lineNumber: 215,
+            lineNumber: 215,
             columnNumber: 17
           }, this) }, void 0, !1, {
             fileName: "app/components/SnopForm.tsx",
+            lineNumber: 214,
             lineNumber: 214,
             columnNumber: 15
           }, this),
@@ -7610,38 +7653,46 @@ function SnopForm({ inputData }) {
               /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CardTitle, { className: "text-2xl", children: "Employee Cost" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
                 lineNumber: 230,
+                lineNumber: 230,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("div", { className: "border-b" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
+                lineNumber: 231,
                 lineNumber: 231,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 229,
+              lineNumber: 229,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CardContent, { className: "grid gap-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CostInput2, { cost: inputData }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 234,
+              lineNumber: 234,
               columnNumber: 21
             }, this) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
+              lineNumber: 233,
               lineNumber: 233,
               columnNumber: 19
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
             lineNumber: 228,
+            lineNumber: 228,
             columnNumber: 17
           }, this) }, void 0, !1, {
             fileName: "app/components/SnopForm.tsx",
+            lineNumber: 227,
             lineNumber: 227,
             columnNumber: 15
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/SnopForm.tsx",
+          lineNumber: 213,
           lineNumber: 213,
           columnNumber: 13
         }, this),
@@ -7651,33 +7702,40 @@ function SnopForm({ inputData }) {
               /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CardTitle, { className: "text-2xl", children: "Outsourcing Cost" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
                 lineNumber: 244,
+                lineNumber: 244,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("div", { className: "border-b" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
+                lineNumber: 245,
                 lineNumber: 245,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 243,
+              lineNumber: 243,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CardContent, { className: "grid gap-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CostInput3, { cost: inputData }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 248,
+              lineNumber: 248,
               columnNumber: 21
             }, this) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
+              lineNumber: 247,
               lineNumber: 247,
               columnNumber: 19
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
             lineNumber: 242,
+            lineNumber: 242,
             columnNumber: 17
           }, this) }, void 0, !1, {
             fileName: "app/components/SnopForm.tsx",
+            lineNumber: 241,
             lineNumber: 241,
             columnNumber: 15
           }, this),
@@ -7686,38 +7744,46 @@ function SnopForm({ inputData }) {
               /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CardTitle, { className: "text-2xl", children: "Inventory Constraint" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
                 lineNumber: 255,
+                lineNumber: 255,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("div", { className: "border-b" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
+                lineNumber: 258,
                 lineNumber: 258,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 254,
+              lineNumber: 254,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CardContent, { className: "grid gap-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(ConstraintInput, { constraint: inputData }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 261,
+              lineNumber: 261,
               columnNumber: 21
             }, this) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
+              lineNumber: 260,
               lineNumber: 260,
               columnNumber: 19
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
             lineNumber: 253,
+            lineNumber: 253,
             columnNumber: 17
           }, this) }, void 0, !1, {
             fileName: "app/components/SnopForm.tsx",
+            lineNumber: 252,
             lineNumber: 252,
             columnNumber: 15
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/SnopForm.tsx",
+          lineNumber: 240,
           lineNumber: 240,
           columnNumber: 13
         }, this),
@@ -7727,33 +7793,40 @@ function SnopForm({ inputData }) {
               /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CardTitle, { className: "text-2xl", children: "Employee Constraint" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
                 lineNumber: 270,
+                lineNumber: 270,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("div", { className: "border-b" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
+                lineNumber: 273,
                 lineNumber: 273,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 269,
+              lineNumber: 269,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CardContent, { className: "grid gap-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(ConstraintInput2, { constraint: inputData }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 276,
+              lineNumber: 276,
               columnNumber: 21
             }, this) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
+              lineNumber: 275,
               lineNumber: 275,
               columnNumber: 19
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
             lineNumber: 268,
+            lineNumber: 268,
             columnNumber: 17
           }, this) }, void 0, !1, {
             fileName: "app/components/SnopForm.tsx",
+            lineNumber: 267,
             lineNumber: 267,
             columnNumber: 15
           }, this),
@@ -7762,43 +7835,52 @@ function SnopForm({ inputData }) {
               /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CardTitle, { className: "text-2xl", children: "Product Constraint" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
                 lineNumber: 283,
+                lineNumber: 283,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)("div", { className: "border-b" }, void 0, !1, {
                 fileName: "app/components/SnopForm.tsx",
+                lineNumber: 286,
                 lineNumber: 286,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 282,
+              lineNumber: 282,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(CardContent, { className: "grid gap-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(ConstraintInput3, { constraint: inputData }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
               lineNumber: 289,
+              lineNumber: 289,
               columnNumber: 21
             }, this) }, void 0, !1, {
               fileName: "app/components/SnopForm.tsx",
+              lineNumber: 288,
               lineNumber: 288,
               columnNumber: 19
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/SnopForm.tsx",
             lineNumber: 281,
+            lineNumber: 281,
             columnNumber: 17
           }, this) }, void 0, !1, {
             fileName: "app/components/SnopForm.tsx",
+            lineNumber: 280,
             lineNumber: 280,
             columnNumber: 15
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/SnopForm.tsx",
           lineNumber: 266,
+          lineNumber: 266,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/components/SnopForm.tsx",
+        lineNumber: 196,
         lineNumber: 196,
         columnNumber: 11
       }, this),
@@ -7806,10 +7888,12 @@ function SnopForm({ inputData }) {
         /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(Button, { className: "bg-blue-500 hover:bg-blue-600", children: params.scenId ? "Update Scenario" : "Create Scenario" }, void 0, !1, {
           fileName: "app/components/SnopForm.tsx",
           lineNumber: 297,
+          lineNumber: 297,
           columnNumber: 13
         }, this),
         params.scenId == null && /* @__PURE__ */ (0, import_jsx_dev_runtime46.jsxDEV)(Button, { variant: "outline", children: "Save Input" }, void 0, !1, {
           fileName: "app/components/SnopForm.tsx",
+          lineNumber: 302,
           lineNumber: 302,
           columnNumber: 15
         }, this),
@@ -7827,30 +7911,36 @@ function SnopForm({ inputData }) {
           {
             fileName: "app/components/SnopForm.tsx",
             lineNumber: 305,
+            lineNumber: 305,
             columnNumber: 15
           },
           this
         ) }, void 0, !1, {
           fileName: "app/components/SnopForm.tsx",
           lineNumber: 304,
+          lineNumber: 304,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/components/SnopForm.tsx",
+        lineNumber: 296,
         lineNumber: 296,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/SnopForm.tsx",
       lineNumber: 118,
+      lineNumber: 118,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/SnopForm.tsx",
     lineNumber: 99,
+    lineNumber: 99,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/components/SnopForm.tsx",
+    lineNumber: 98,
     lineNumber: 98,
     columnNumber: 5
   }, this);
@@ -15197,6 +15287,7 @@ function SnopInput() {
   let [date, setDate] = import_react46.default.useState(/* @__PURE__ */ new Date()), { snopInput } = (0, import_react47.useLoaderData)(), navigate = (0, import_react47.useNavigate)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime79.jsxDEV)(SnopForm, { inputData: snopInput }, void 0, !1, {
     fileName: "app/routes/snop.input.tsx",
+    lineNumber: 98,
     lineNumber: 98,
     columnNumber: 5
   }, this);

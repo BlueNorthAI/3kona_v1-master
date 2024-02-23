@@ -39,6 +39,7 @@ export const action = async ({ request }) => {
 export default function UpdateScenario() {
   const [date, setDate] = React.useState<Date>(new Date());
   const { scenarioData } = useLoaderData<typeof loader>();
+  const 
 
 
   return (

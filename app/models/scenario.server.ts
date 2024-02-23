@@ -46,9 +46,12 @@ export async function updateScenario(scenario_id, status) {
 }
 
 export async function getScenarioById(scenario_id) {
+export async function getScenarioById(scenario_id) {
   return await prisma.snopScenario.findUnique({
     where: {
       scenario_id: scenario_id, // Assuming scenario_id is the unique identifier or primary key
+    },
+  });
     },
   });
 }

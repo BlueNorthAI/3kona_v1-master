@@ -30,7 +30,7 @@ export function DataTableRowActions<TData>({
 }: DataTableRowActionsProps<TData>) {
   const task = taskSchema.parse(row.original);
   const fetcher = useFetcher();
-console.log(`inside row action`,row.original)
+// console.log(`inside row action`,row.original)
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
